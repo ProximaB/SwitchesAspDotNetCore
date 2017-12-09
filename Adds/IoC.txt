@@ -1,0 +1,2 @@
+services.AddSingleton<IMoviesService, MoviesService>();
+            services.AddSingleton<IReviewsService, ReviewsService>();

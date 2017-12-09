@@ -1,0 +1,3 @@
+Enable-Migrations -StartUpProjectName MoviesAPI.DB
+Add-Migration {{NAME}} -StartUpProjectName MoviesAPI.DB
+Update-Database -StartUpProjectName MoviesAPI.DB

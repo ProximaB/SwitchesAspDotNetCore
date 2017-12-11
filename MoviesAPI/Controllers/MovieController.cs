@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MoviesAPI.DB.DbModels;
-using MoviesAPI.Filters;
-using MoviesAPI.Interfaces;
-using MoviesAPI.Models;
+using SwitchesAPI.DB.DbModels;
+using SwitchesAPI.Filters;
+using SwitchesAPI.Interfaces;
+using SwitchesAPI.Models;
 using System.Collections.Generic;
 
 namespace MoviesAPI.Controllers

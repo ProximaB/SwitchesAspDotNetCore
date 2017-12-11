@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace MoviesAPI.Filters
+namespace SwitchesAPI.Filters
 {
     public class ModelValidationAttribute : ActionFilterAttribute
     {

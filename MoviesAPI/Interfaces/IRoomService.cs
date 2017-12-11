@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using SwitchesAPI.DB.DbModels;
 
-namespace MoviesAPI.Interfaces
+namespace SwitchesAPI.Interfaces
 {
     public interface IRoomService
     {
@@ -9,7 +9,7 @@ namespace MoviesAPI.Interfaces
 
         Room GetById(int id);
 
-        List<Room> GetByRoomId(int roomId);
+        List<Switch> GetByRoomId(int roomId);
 
         bool AddNewRoom(Room room);
 

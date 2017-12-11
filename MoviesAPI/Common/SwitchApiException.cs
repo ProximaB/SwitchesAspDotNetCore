@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace MoviesAPI.Common
+namespace SwitchesAPI.Common
 {
     [Serializable]
-    public class MovieApiException : Exception
+    public class SwitchApiException : Exception
     {
         //
         // For guidelines regarding the creation of new exception types, see
@@ -13,19 +13,19 @@ namespace MoviesAPI.Common
         //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
         //
 
-        public MovieApiException()
+        public SwitchApiException()
         {
         }
 
-        public MovieApiException(string message) : base(message)
+        public SwitchApiException(string message) : base(message)
         {
         }
 
-        public MovieApiException(string message, Exception inner) : base(message, inner)
+        public SwitchApiException(string message, Exception inner) : base(message, inner)
         {
         }
 
-        protected MovieApiException(
+        protected SwitchApiException(
             SerializationInfo info,
             StreamingContext context) : base(info, context)
         {

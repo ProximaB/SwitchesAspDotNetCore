@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace MoviesAPI.Filters
+namespace SwitchesAPI.Filters
 {
     public class ExecutionTimeAttribute : ActionFilterAttribute
     {

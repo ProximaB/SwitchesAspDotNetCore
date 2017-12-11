@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using MoviesAPI.Common;
+using SwitchesAPI.Common;
 
-namespace MoviesAPI.Filters
+namespace SwitchesAPI.Filters
 {
-    public class MovieApiExceptionFilterAttribute : ExceptionFilterAttribute
+    public class SwitchApiExceptionFilterAttribute : ExceptionFilterAttribute
     {
         public override void OnException(ExceptionContext context)
         {

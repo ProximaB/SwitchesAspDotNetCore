@@ -10,9 +10,9 @@ namespace MoviesAPI.Controllers
     [Route("api/[controller]")]
     public class ReviewController : Controller
     {
-        private readonly IReviewsService _reviewsService;
+        private readonly IRoomService _reviewsService;
 
-        public ReviewController(IReviewsService reviewsService)
+        public ReviewController(IRoomService reviewsService)
         {
             _reviewsService = reviewsService;
         }

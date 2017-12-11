@@ -11,9 +11,9 @@ namespace MoviesAPI.Controllers
     public class MovieController : Controller
     {
         private readonly IMoviesService _moviesService;
-        private readonly IReviewsService _reviewsService;
+        private readonly IRoomService _reviewsService;
 
-        public MovieController(IMoviesService moviesService, IReviewsService reviewsService)
+        public MovieController(IMoviesService moviesService, IRoomService reviewsService)
         {
             _moviesService = moviesService;
             _reviewsService = reviewsService;

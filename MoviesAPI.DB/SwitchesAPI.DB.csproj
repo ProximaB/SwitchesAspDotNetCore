@@ -48,8 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbModels\Movie.cs" />
-    <Compile Include="DbModels\Review.cs" />
+    <Compile Include="DbModels\Switch.cs" />
+    <Compile Include="DbModels\Room.cs" />
     <Compile Include="Migrations\201712061721317_Initial.cs" />
     <Compile Include="Migrations\201712061721317_Initial.Designer.cs">
       <DependentUpon>201712061721317_Initial.cs</DependentUpon>

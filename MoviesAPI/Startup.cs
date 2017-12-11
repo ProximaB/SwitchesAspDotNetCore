@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using MoviesAPI.Interfaces;
-using MoviesAPI.Services;
+using SwitchesAPI.Interfaces;
+using SwitchesAPI.Services;
 using AutoMapper;
 using System.Reflection;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
-using MoviesAPI.DB;
+using SwitchesAPI.DB;
 
 namespace MoviesAPI
 {
@@ -30,7 +30,7 @@ namespace MoviesAPI
 
             services.AddScoped<IMoviesService, MoviesService>();
             services.AddScoped<IReviewsService, ReviewsService>();
-            services.AddScoped<MoviesContext>();
+            services.AddScoped<SwitchesContext>();
 
 
             services.AddSwaggerGen(c =>

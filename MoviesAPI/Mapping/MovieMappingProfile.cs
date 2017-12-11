@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using MoviesAPI.DB.DbModels;
-using MoviesAPI.Models;
+using SwitchesAPI.DB.DbModels;
+using SwitchesAPI.Models;
 
-namespace MoviesAPI.Mapping
+namespace SwitchesAPI.Mapping
 {
-    public class MovieMappingProfile : Profile
+    public class SwitchMappingProfile : Profile
     {
-        public MovieMappingProfile()
+        public SwitchMappingProfile()
         {
-            CreateMap<MovieRequest, Movie>();
-            CreateMap<Movie, MovieResponse>();
+            CreateMap<SwitchRequest, Switch>();
+            CreateMap<Switch, SwitchResponse>();
         }
     }
 }

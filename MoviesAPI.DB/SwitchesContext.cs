@@ -5,7 +5,7 @@ namespace SwitchesAPI.DB
 {
     public class SwitchesContext : DbContext
     {
-        public SwitchesContext() : base("Data Source=.;Initial Catalog=MoviesAPIDb;Integrated Security=True")
+        public SwitchesContext() : base("Data Source=.;Initial Catalog=SwitchesAPIDb;Integrated Security=True")
         {
         }
 

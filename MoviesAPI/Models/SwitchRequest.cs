@@ -12,8 +12,6 @@ namespace SwitchesAPI.Models
         [Required]
         public string State { get; set; }
 
-        public string AddTime { get; set; }
-
         public int RoomId { get; set; }
     }
 }

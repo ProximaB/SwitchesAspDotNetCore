@@ -10,3 +10,7 @@ Update-Database -StartUpProjectName SwitchesAPI.DB
 
 
 
+Add-Migration {Improves} -StartUpProjectName SwitchesAPI.DB
+
+
+

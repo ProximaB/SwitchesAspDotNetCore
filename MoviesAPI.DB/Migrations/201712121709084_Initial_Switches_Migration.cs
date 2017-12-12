@@ -3,7 +3,7 @@ namespace SwitchesAPI.DB.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Switches_Initial_Migration : DbMigration
+    public partial class Initial_Switches_Migration : DbMigration
     {
         public override void Up()
         {
@@ -12,8 +12,9 @@ namespace SwitchesAPI.DB.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(nullable: false),
                         Description = c.String(),
+                        CreateDate = c.DateTime(nullable: false, storeType: "date"),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -22,10 +23,10 @@ namespace SwitchesAPI.DB.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(nullable: false),
                         Description = c.String(),
-                        State = c.String(),
-                        AddTime = c.String(),
+                        State = c.String(nullable: false),
+                        CreateDate = c.DateTime(nullable: false, storeType: "date"),
                         RoomId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)

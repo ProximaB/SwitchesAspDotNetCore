@@ -1,4 +1,6 @@
-﻿namespace SwitchesAPI.Models
+﻿using System;
+
+namespace SwitchesAPI.Models
 {
     public class SwitchResponse
     {
@@ -10,7 +12,7 @@
 
         public string State { get; set; }
 
-        public string AddTime { get; set; }
+        public DateTime CreateDate { get; set; }
 
         public int RoomId { get; set; }
     }

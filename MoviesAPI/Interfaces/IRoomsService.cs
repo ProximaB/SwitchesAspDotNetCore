@@ -15,6 +15,6 @@ namespace SwitchesAPI.Interfaces
 
         bool UpdateRoom(Room room);
 
-        void Remove(int roomId);
+        bool Delete(int roomId);
     }
 }

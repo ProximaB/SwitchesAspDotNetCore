@@ -28,6 +28,9 @@ namespace SwitchesAPI.Services
 
         public bool AddNewSwitch(Switch _switch)
         {
+            if (_switch == null) return false;
+
+            _switch.CreateDate = DateTime.Now;
             _context.Switches.Add(_switch);
 
             try
@@ -45,13 +48,14 @@ namespace SwitchesAPI.Services
 
         public bool UpdateSwitch(Switch _switch)
         {
+            
             Switch foundSwitch = _context.Switches.Find(_switch.Id);
 
             if (foundSwitch == null)
             {
                 return false;
             }
-
+            _switch.CreateDate = DateTime.Now;
             foundSwitch.Name = _switch.Name;
             foundSwitch.RoomId = _switch.RoomId;
             foundSwitch.State = _switch.State;
@@ -60,11 +64,26 @@ namespace SwitchesAPI.Services
             return true;
         }
 
-        public void Remove(int switchId)
+        public bool Delete(int switchId)
         {
             Switch foundSwitch = _context.Switches.Find(switchId);
+
+            if (foundSwitch == null)
+                return false;
+
             _context.Switches.Remove(foundSwitch);
-            _context.SaveChanges();
+
+            try
+            {
+                
+                _context.SaveChanges();
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

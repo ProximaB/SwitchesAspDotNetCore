@@ -91,7 +91,7 @@ namespace MoviesAPI.Controllers
         {
             if (_roomsService.UpdateRoom(AutoMapper.Mapper.Map<Room>(room)))
             {
-                return NoContent();
+                return Ok();
             }
 
             return BadRequest();
@@ -105,7 +105,11 @@ namespace MoviesAPI.Controllers
         [HttpDelete("{roomId}")]
         public IActionResult Delete(int roomId)
         {
-            _roomsService.Remove(roomId);
+            if (!_roomsService.Delete(roomId))
+            {
+                return BadRequest();
+            }
+
             return Ok();
         }
     }

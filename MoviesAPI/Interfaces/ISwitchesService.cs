@@ -13,6 +13,6 @@ namespace SwitchesAPI.Interfaces
 
         bool UpdateSwitch(Switch _switch);
 
-        void Remove(int switchID);
+        bool Delete(int switchID);
     }
 }

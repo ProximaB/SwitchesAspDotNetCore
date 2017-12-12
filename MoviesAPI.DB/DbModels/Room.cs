@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SwitchesAPI.DB.DbModels
 {
@@ -12,6 +14,9 @@ namespace SwitchesAPI.DB.DbModels
 
         public string Description { get; set; }
 
+        [Column(TypeName = "Date")]
+
+        public DateTime CreateDate { get; set;  }
         public virtual ICollection<Switch> Switches { get; set; }
     }
 }

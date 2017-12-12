@@ -54,17 +54,30 @@ namespace SwitchesAPI.Services
             }
 
             foundRoom.Name = room.Name;
-            foundRoom.Switches = room.Switches.ToList(); //?? cop list ref to ref
+            foundRoom.Switches = room.Switches.ToList();
             context.SaveChanges();
 
             return true;
         }
 
-        public void Remove(int roomId)
+        public bool Delete(int roomId)
         {
             Room room = GetById(roomId);
+            if (room == null)
+            {
+                return false;
+            }
+
+            var switches = room.Switches;
+            foreach (var sw in switches)
+            {
+                context.Switches.Remove(sw);
+            }
+
             context.Rooms.Remove(room);
             context.SaveChanges();
+
+            return true;
         }
     }
 }

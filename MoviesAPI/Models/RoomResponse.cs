@@ -1,4 +1,6 @@
-﻿namespace SwitchesAPI.Models
+﻿using System;
+
+namespace SwitchesAPI.Models
 {
     public class RoomResponse
     {
@@ -8,5 +10,6 @@
 
         public string Description { get; set; }
 
+        public DateTime CreateDate { get; set; }
     }
 }

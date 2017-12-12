@@ -94,7 +94,11 @@ namespace SwitchesAPI.Controllers
         [HttpDelete("{switchId}")]
         public IActionResult Delete(int switchId)
         {
-            _switchesService.Remove(switchId);
+            if (!_switchesService.Delete(switchId))
+            {
+                return BadRequest();
+            }
+
             return Ok();
         }
     }

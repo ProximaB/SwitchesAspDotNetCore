@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MoviesAPI.DB\MoviesAPI.DB.csproj" />
+    <ProjectReference Include="..\MoviesAPI.DB\SwitchesAPI.DB.csproj" />
   </ItemGroup>
 
 </Project>

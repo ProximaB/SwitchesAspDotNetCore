@@ -5,13 +5,13 @@ using SwitchesAPI.Interfaces;
 using SwitchesAPI.Common;
 using SwitchesAPI.DB;
 
-namespace MoviesAPI.Services
+namespace SwitchesAPI.Services
 {
-    public class RoomService : IRoomService
+    public class RoomsService : IRoomsService
     {        
         private readonly SwitchesContext context;
 
-        public RoomService(SwitchesContext context)
+        public RoomsService(SwitchesContext context)
         {   
             this.context = context;
         }

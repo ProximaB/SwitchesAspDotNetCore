@@ -8,7 +8,7 @@ namespace SwitchesAPI.Filters
     {
         public override void OnException(ExceptionContext context)
         {
-            if (context.Exception is MovieApiException)
+            if (context.Exception is SwitchApiException)
             {
                 context.Result = new BadRequestObjectResult(context.Exception.Message);
             }

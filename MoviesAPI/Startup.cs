@@ -28,14 +28,14 @@ namespace MoviesAPI
                 opt => opt.CreateMissingTypeMaps = true,
                 Assembly.GetEntryAssembly());
 
-            services.AddScoped<IMoviesService, MoviesService>();
-            services.AddScoped<IReviewsService, ReviewsService>();
+            services.AddScoped<ISwitchesService, SwitchesService>();
+            services.AddScoped<IRoomsService, RoomsService>();
             services.AddScoped<SwitchesContext>();
 
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Version = "v1", Title = "Movies API", });
+                c.SwaggerDoc("v1", new Info { Version = "v1", Title = "Switches API", });
                 c.CustomSchemaIds(i => i.FullName);
                 var basePath = System.AppContext.BaseDirectory;
                 var xmlPath = Path.Combine(basePath, "MoviesAPI.xml");
@@ -58,7 +58,7 @@ namespace MoviesAPI
             app.UseSwaggerUI(c =>
             {
                 var swaggerPath = "/swagger/v1/swagger.json";
-                c.SwaggerEndpoint(swaggerPath, "Movies API V1");
+                c.SwaggerEndpoint(swaggerPath, "Switches API V1");
             });
         }
     }

@@ -3,7 +3,7 @@ using SwitchesAPI.DB.DbModels;
 
 namespace SwitchesAPI.Interfaces
 {
-    public interface IRoomService
+    public interface IRoomsService
     {
         List<Room> GetAll();
 

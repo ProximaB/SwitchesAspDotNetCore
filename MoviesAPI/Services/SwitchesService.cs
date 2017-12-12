@@ -4,13 +4,13 @@ using SwitchesAPI.DB.DbModels;
 using SwitchesAPI.Interfaces;
 using SwitchesAPI.DB;
 
-namespace MoviesAPI.Services
+namespace SwitchesAPI.Services
 {
-    public class SwitchService : ISwitchService
+    public class SwitchesService : ISwitchesService
     {
         private readonly SwitchesContext _context;
 
-        public SwitchService(SwitchesContext context)
+        public SwitchesService(SwitchesContext context)
         {
             _context = context;
         }

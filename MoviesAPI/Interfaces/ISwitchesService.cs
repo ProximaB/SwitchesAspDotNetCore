@@ -3,7 +3,7 @@ using SwitchesAPI.DB.DbModels;
 
 namespace SwitchesAPI.Interfaces
 {
-    public interface ISwitchService
+    public interface ISwitchesService
     {
         List<Switch> GetAll();
 

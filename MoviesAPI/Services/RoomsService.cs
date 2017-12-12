@@ -39,13 +39,8 @@ namespace SwitchesAPI.Services
 
         public bool AddNewRoom(Room room)
         {
-            var foundRoom = this.context.Rooms.SingleOrDefault(r => r.Id == room.Id);
-            if(foundRoom == null)
-            {
-                return false;
-            }
-
             context.Rooms.Add(room);
+            context.SaveChanges();
             return true;
         }
 

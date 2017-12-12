@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SwitchesAPI.DB.DbModels;
 using SwitchesAPI.Interfaces;
@@ -25,10 +26,21 @@ namespace SwitchesAPI.Services
             return _context.Switches.Find(id);
         }
 
-        public void AddNewSwitch(Switch _switch)
+        public bool AddNewSwitch(Switch _switch)
         {
             _context.Switches.Add(_switch);
-            _context.SaveChanges();
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+
+                return false;
+            }
+
+            return true;
         }
 
         public bool UpdateSwitch(Switch _switch)

@@ -12,18 +12,12 @@ namespace SwitchesAPI.DB.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        //protected override void Seed(MoviesAPI.DB.SwitchesContext context)
-        //{
-        //    //  This method will be called after migrating to the latest version.
+        protected override void Seed(SwitchesAPI.DB.SwitchesContext context)
+        {
+            //  This method will be called after migrating to the latest version.
 
-        //    //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-        //    //  to avoid creating duplicate seed data.
-
-        //   // context.Movies.AddOrUpdate(m => m.Title, new DbModels.Movie()
-        //   // {
-        //   ////     Title = "Dodany przez Seed",
-        //   //     Year = 2017
-        //   // });
-        //}
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data.
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace SwitchesAPI.Models
         [Required]
         public string Name { get; set; }
 
-        public short Description { get; set; }
+        public string Description { get; set; }
 
         [Required]
         public string State { get; set; }

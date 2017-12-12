@@ -9,7 +9,7 @@ namespace SwitchesAPI.Interfaces
 
         Switch GetById(int id);
 
-        void AddNewSwitch(Switch _switch);
+        bool AddNewSwitch(Switch _switch);
 
         bool UpdateSwitch(Switch _switch);
 

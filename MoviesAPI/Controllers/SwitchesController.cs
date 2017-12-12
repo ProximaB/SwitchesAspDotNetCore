@@ -5,7 +5,7 @@ using SwitchesAPI.Interfaces;
 using SwitchesAPI.Models;
 using System.Collections.Generic;
 
-namespace MoviesAPI.Controllers
+namespace SwitchesAPI.Controllers
 {
     [Route("api/[controller]")]
     public class SwitchController : Controller
@@ -13,16 +13,16 @@ namespace MoviesAPI.Controllers
         private readonly ISwitchesService _switchesService;
         private readonly IRoomsService _roomsService;
 
-        public SwitchController(ISwitchesService moviesService, IRoomsService roomsServices)
+        public SwitchController(ISwitchesService switchesService, IRoomsService roomsServices)
         {
-            _switchesService = moviesService;
+            _switchesService = switchesService;
             _roomsService = roomsServices;
         }
 
         /// <summary>
-        /// Get all movies
+        /// Get all Switeches
         /// </summary>
-        /// <returns>List of movies</returns>
+        /// <returns>List of Switches</returns>
         [HttpGet]
         public IActionResult GetAllMovies()
         {
@@ -52,21 +52,26 @@ namespace MoviesAPI.Controllers
         /// <summary>
         /// Add new switch to repositorium
         /// </summary>
-        /// <param name="switch">new switch</param>
+        /// <param name="_switch">new switch</param>
         /// <returns></returns>
         [HttpPost]
         [ModelValidationAttribute]
         public IActionResult Post([FromBody]SwitchRequest _switch)
         {
-            _switchesService.AddNewSwitch(AutoMapper.Mapper.Map<Switch>(_switch));
+            if (!_switchesService.AddNewSwitch(AutoMapper.Mapper.Map<Switch>(_switch)))
+            {
+                return BadRequest();
+            }
 
             return Ok();
+
         }
 
         /// <summary>
         /// Update switch in repositorium
         /// </summary>
-        /// <param name="switch">updated switch</param>
+        /// <param name="switchId">Updated switch Id</param>
+        /// <param name="switchRequest">obj Switch</param>
         /// <returns></returns>
         [HttpPut("{switchId}")]
         public IActionResult Put(int switchId, [FromBody]SwitchRequest switchRequest)

@@ -18,7 +18,7 @@ namespace MoviesAPI.Controllers
         }
 
         /// <summary>
-        /// Get all reviews
+        /// Get all Rooms
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -29,9 +29,9 @@ namespace MoviesAPI.Controllers
         }
 
         /// <summary>
-        /// Get room by id
+        /// Get Room by id
         /// </summary>
-        /// <param name="roomId">review id</param>
+        /// <param name="roomId">Room id</param>
         /// <returns>Room if exist</returns>
         [HttpGet("{roomId}")]
         public IActionResult Get(int roomId)

@@ -22,3 +22,26 @@ public class Blog
     public int BlogId { get; set; }
     public string Url { get; set; }
 }
+
+
+DataTime:
+[Column(TypeName="Date")]
+public DateTime ReportDate { get; set; }
+
+Nazwy ze specjami.
+public class Participant : EntityBase
+{
+    public int ID { get; set; }
+
+    [Required]
+    [Display(Name = "Given Name")]
+    public string GivenName { get; set; }
+
+    [Required]
+    [Display(Name = "Surname")]
+    public string Surname { get; set; }
+
+    [DataType(DataType.Date)]
+    [Display(Name = "Date of Birth")]
+    public DateTime DateOfBirth { get; set; }
+}

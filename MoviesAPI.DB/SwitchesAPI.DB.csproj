@@ -7,8 +7,8 @@
     <ProjectGuid>{C31C871E-A6D5-45E3-BCB7-9B535EC925C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MoviesAPI.DB</RootNamespace>
-    <AssemblyName>MoviesAPI.DB</AssemblyName>
+    <RootNamespace>SwitchesAPI.DB</RootNamespace>
+    <AssemblyName>SwitchesAPI.DB</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -50,9 +50,9 @@
   <ItemGroup>
     <Compile Include="DbModels\Switch.cs" />
     <Compile Include="DbModels\Room.cs" />
-    <Compile Include="Migrations\201712061721317_Initial.cs" />
-    <Compile Include="Migrations\201712061721317_Initial.Designer.cs">
-      <DependentUpon>201712061721317_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201712121436308_Switches_Initial_Migration.cs" />
+    <Compile Include="Migrations\201712121436308_Switches_Initial_Migration.Designer.cs">
+      <DependentUpon>201712121436308_Switches_Initial_Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SwitchesContext.cs" />
@@ -63,8 +63,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712061721317_Initial.resx">
-      <DependentUpon>201712061721317_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712121436308_Switches_Initial_Migration.resx">
+      <DependentUpon>201712121436308_Switches_Initial_Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

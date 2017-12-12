@@ -57,9 +57,19 @@ namespace SwitchesAPI.Services
             }
             _switch.CreateDate = DateTime.Now;
             foundSwitch.Name = _switch.Name;
+            foundSwitch.Description = _switch.Description;
             foundSwitch.RoomId = _switch.RoomId;
             foundSwitch.State = _switch.State;
-            _context.SaveChanges();
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
 
             return true;
         }

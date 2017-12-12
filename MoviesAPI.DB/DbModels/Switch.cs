@@ -14,7 +14,8 @@ namespace SwitchesAPI.DB.DbModels
         public string Name { get; set; }
 
         public string Description { get; set; }
-        [Required]
+
+        [Required, RegularExpression(@"ON|OFF")]
         public string State { get; set; }
 
         [Column(TypeName = "Date")]

@@ -24,10 +24,10 @@ namespace SwitchesAPI.Controllers
         /// </summary>
         /// <returns>List of Switches</returns>
         [HttpGet]
-        public IActionResult GetAllMovies()
+        public IActionResult GetAllSwitches()
         {
-            var _switch = AutoMapper.Mapper.Map<List<SwitchResponse>>(_switchesService.GetAll());
-            return Ok(_switch);
+            var _switches = AutoMapper.Mapper.Map<List<SwitchResponse>>(_switchesService.GetAll());
+            return Ok(_switches);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace SwitchesAPI.Controllers
         /// </summary>
         /// <param name="switchId">movie identifier</param>
         /// <returns>Switch if found</returns>
-        [HttpGet("{movieId}")]
+        [HttpGet("{switchId}")]
         [ExecutionTime]
         public IActionResult Get(int switchId)
         {

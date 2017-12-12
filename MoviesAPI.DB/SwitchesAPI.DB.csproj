@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201712122017285_Improves.Designer.cs">
       <DependentUpon>201712122017285_Improves.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712122121390_RegularExpression_ON_OFF.cs" />
+    <Compile Include="Migrations\201712122121390_RegularExpression_ON_OFF.Designer.cs">
+      <DependentUpon>201712122121390_RegularExpression_ON_OFF.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SwitchesContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +76,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712122017285_Improves.resx">
       <DependentUpon>201712122017285_Improves.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712122121390_RegularExpression_ON_OFF.resx">
+      <DependentUpon>201712122121390_RegularExpression_ON_OFF.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

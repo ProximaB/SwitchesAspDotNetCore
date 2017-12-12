@@ -36,29 +36,25 @@ Switches Sample:
   "name": "Switch 1",
   "description": "Switch 1",
   "state": "ON",
-  "addTime": "1012201312121221",
-  "roomId": 1
+  "roomId": 6
 }
 {
   "name": "Switch 2",
   "description": "string",
   "state": "ON",
-  "addTime": "1012201312121232",
-  "roomId": 2
+  "roomId": 7
 }
 {
   "name": "Switch 3",
   "description": "Switch 3",
   "state": "OFF",
-  "addTime": "1012201312121210",
-  "roomId": 3
+  "roomId": 8
 }
 {
   "name": "Switch 4",
   "description": "string",
   "state": "OFF",
-  "addTime": "1012201312121267",
-  "roomId": 1
+  "roomId": 6
 }
 
 Rooms Sample:

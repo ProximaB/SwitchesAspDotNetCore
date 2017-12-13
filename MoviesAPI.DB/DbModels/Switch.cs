@@ -18,8 +18,8 @@ namespace SwitchesAPI.DB.DbModels
         [Required, RegularExpression(@"ON|OFF")]
         public string State { get; set; }
 
-        [Column(TypeName = "datetime2")]
-        public DateTime CreateDate { get; set; }
+        [Column("Last modified DateTime", TypeName = "DateTime2")]
+        public DateTime LastModifieDateTime { get; set; }
 
         [Required]
         public int RoomId { get; set; }

@@ -66,6 +66,10 @@
     <Compile Include="Migrations\201712131421312_added DataTime2.Designer.cs">
       <DependentUpon>201712131421312_added DataTime2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712131636256_Seed_override.cs" />
+    <Compile Include="Migrations\201712131636256_Seed_override.Designer.cs">
+      <DependentUpon>201712131636256_Seed_override.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SwitchesContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712131421312_added DataTime2.resx">
       <DependentUpon>201712131421312_added DataTime2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131636256_Seed_override.resx">
+      <DependentUpon>201712131636256_Seed_override.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

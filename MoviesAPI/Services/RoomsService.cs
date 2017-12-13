@@ -43,7 +43,7 @@ namespace SwitchesAPI.Services
         {
             if (room == null) return false;
 
-            room.CreateDate = DateTime.Now;
+            room.LastModiDateTime = DateTime.Now;
             context.Rooms.Add(room);
             context.SaveChanges();
         
@@ -67,7 +67,7 @@ namespace SwitchesAPI.Services
             {
                 return false;
             }
-            foundRoom.CreateDate = DateTime.Now;
+            foundRoom.LastModiDateTime = DateTime.Now;
             foundRoom.Name = room.Name;
             foundRoom.Switches = room.Switches.ToList();
             context.SaveChanges();

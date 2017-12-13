@@ -30,7 +30,7 @@ namespace SwitchesAPI.Services
         {
             if (_switch == null) return false;
 
-            _switch.CreateDate = DateTime.Now;
+            _switch.LastModifieDateTime = DateTime.Now;
             _context.Switches.Add(_switch);
 
             try
@@ -55,7 +55,7 @@ namespace SwitchesAPI.Services
             {
                 return false;
             }
-            foundSwitch.CreateDate = DateTime.Now;
+            foundSwitch.LastModifieDateTime = DateTime.Now;
             foundSwitch.Name = _switch.Name;
             foundSwitch.Description = _switch.Description;
             foundSwitch.RoomId = _switch.RoomId;

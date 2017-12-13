@@ -14,8 +14,8 @@ namespace SwitchesAPI.DB.DbModels
 
         public string Description { get; set; }
 
-        [Column(TypeName = "datetime2 ")]
-        public DateTime CreateDate { get; set;  }
+        [Column("Last modified DateTime",TypeName = "DateTime2")]
+        public DateTime LastModiDateTime { get; set;  }
 
         public virtual ICollection<Switch> Switches { get; set; }
     }

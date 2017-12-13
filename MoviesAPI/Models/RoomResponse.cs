@@ -10,6 +10,6 @@ namespace SwitchesAPI.Models
 
         public string Description { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime LastModiDateTime { get; set; }
     }
 }

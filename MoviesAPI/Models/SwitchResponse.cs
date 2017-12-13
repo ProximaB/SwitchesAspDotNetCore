@@ -12,7 +12,7 @@ namespace SwitchesAPI.Models
 
         public string State { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime LastModiDateTime { get; set; }
 
         public int RoomId { get; set; }
     }

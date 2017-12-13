@@ -70,6 +70,10 @@
     <Compile Include="Migrations\201712131636256_Seed_override.Designer.cs">
       <DependentUpon>201712131636256_Seed_override.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712132206178_LastModifiedDataTime.cs" />
+    <Compile Include="Migrations\201712132206178_LastModifiedDataTime.Designer.cs">
+      <DependentUpon>201712132206178_LastModifiedDataTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SwitchesContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712131636256_Seed_override.resx">
       <DependentUpon>201712131636256_Seed_override.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712132206178_LastModifiedDataTime.resx">
+      <DependentUpon>201712132206178_LastModifiedDataTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

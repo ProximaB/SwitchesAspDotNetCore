@@ -62,6 +62,10 @@
     <Compile Include="Migrations\201712122121390_RegularExpression_ON_OFF.Designer.cs">
       <DependentUpon>201712122121390_RegularExpression_ON_OFF.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712131421312_added DataTime2.cs" />
+    <Compile Include="Migrations\201712131421312_added DataTime2.Designer.cs">
+      <DependentUpon>201712131421312_added DataTime2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SwitchesContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +83,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712122121390_RegularExpression_ON_OFF.resx">
       <DependentUpon>201712122121390_RegularExpression_ON_OFF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131421312_added DataTime2.resx">
+      <DependentUpon>201712131421312_added DataTime2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

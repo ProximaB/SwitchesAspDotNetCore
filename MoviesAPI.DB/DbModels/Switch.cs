@@ -18,7 +18,7 @@ namespace SwitchesAPI.DB.DbModels
         [Required, RegularExpression(@"ON|OFF")]
         public string State { get; set; }
 
-        [Column(TypeName = "Date")]
+        [Column(TypeName = "datetime2")]
         public DateTime CreateDate { get; set; }
 
         [Required]

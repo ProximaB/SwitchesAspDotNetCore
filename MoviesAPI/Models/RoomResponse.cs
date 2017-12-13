@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlTypes;
 
 namespace SwitchesAPI.Models
 {
@@ -10,6 +11,6 @@ namespace SwitchesAPI.Models
 
         public string Description { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public TypeSmallDateTimeSchemaImporterExtension CreateDate { get; set; }
     }
 }

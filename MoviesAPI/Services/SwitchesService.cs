@@ -55,7 +55,7 @@ namespace SwitchesAPI.Services
             {
                 return false;
             }
-            _switch.CreateDate = DateTime.Now;
+            foundSwitch.CreateDate = DateTime.Now;
             foundSwitch.Name = _switch.Name;
             foundSwitch.Description = _switch.Description;
             foundSwitch.RoomId = _switch.RoomId;

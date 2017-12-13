@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using SwitchesAPI.DB.DbModels;
 using SwitchesAPI.Interfaces;
@@ -39,8 +41,21 @@ namespace SwitchesAPI.Services
 
         public bool AddNewRoom(Room room)
         {
+            if (room == null) return false;
+
+            room.CreateDate = DateTime.Now;
             context.Rooms.Add(room);
             context.SaveChanges();
+        
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+
+                return false;
+            }
             return true;
         }
 
@@ -52,7 +67,7 @@ namespace SwitchesAPI.Services
             {
                 return false;
             }
-
+            foundRoom.CreateDate = DateTime.Now;
             foundRoom.Name = room.Name;
             foundRoom.Switches = room.Switches.ToList();
             context.SaveChanges();

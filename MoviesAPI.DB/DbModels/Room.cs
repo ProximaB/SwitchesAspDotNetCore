@@ -14,9 +14,9 @@ namespace SwitchesAPI.DB.DbModels
 
         public string Description { get; set; }
 
-        [Column(TypeName = "Date")]
-
+        [Column(TypeName = "datetime2 ")]
         public DateTime CreateDate { get; set;  }
+
         public virtual ICollection<Switch> Switches { get; set; }
     }
 }

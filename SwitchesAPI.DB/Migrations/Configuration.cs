@@ -11,7 +11,7 @@ namespace SwitchesAPI.DB.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(SwitchesAPI.DB.SwitchesContext context)

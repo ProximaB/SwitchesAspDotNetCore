@@ -45,7 +45,6 @@ namespace SwitchesAPI.Services
 
             room.LastModiDateTime = DateTime.Now;
             context.Rooms.Add(room);
-            context.SaveChanges();
         
             try
             {
@@ -67,11 +66,20 @@ namespace SwitchesAPI.Services
             {
                 return false;
             }
+
             foundRoom.LastModiDateTime = DateTime.Now;
             foundRoom.Name = room.Name;
-            foundRoom.Switches = room.Switches.ToList();
-            context.SaveChanges();
+            foundRoom.Description = room.Description;
 
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+
+                return false;
+            }
             return true;
         }
 

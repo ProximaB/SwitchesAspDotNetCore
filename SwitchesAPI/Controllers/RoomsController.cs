@@ -87,7 +87,7 @@ namespace MoviesAPI.Controllers
         /// <param name="room">updated room</param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult Put([FromBody]RoomRequest room)
+        public IActionResult Put([FromBody]RoomRequestPut room)
         {
             if (_roomsService.UpdateRoom(AutoMapper.Mapper.Map<Room>(room)))
             {

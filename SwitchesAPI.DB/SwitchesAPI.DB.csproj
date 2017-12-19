@@ -87,6 +87,10 @@
     <Compile Include="Migrations\201712182317180_migration.Designer.cs">
       <DependentUpon>201712182317180_migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712191711094_Reset.cs" />
+    <Compile Include="Migrations\201712191711094_Reset.Designer.cs">
+      <DependentUpon>201712191711094_Reset.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SwitchesContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712182317180_migration.resx">
       <DependentUpon>201712182317180_migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712191711094_Reset.resx">
+      <DependentUpon>201712191711094_Reset.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

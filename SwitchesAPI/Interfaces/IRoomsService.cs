@@ -9,11 +9,11 @@ namespace SwitchesAPI.Interfaces
 
         Room GetById(int id);
 
-        List<Switch> GetByRoomId(int roomId);
+        List<Switch> GetSwitchesByRoomId(int roomId);
 
         bool AddNewRoom(Room room);
 
-        bool UpdateRoom(Room room);
+        bool UpdateRoom(int roomId, Room room);
 
         bool Delete(int roomId);
     }

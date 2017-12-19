@@ -7,9 +7,14 @@
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
+    <Configurations>Debug;Release;SwitchesAPI</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\net471\SwitchesAPI.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SwitchesAPI|AnyCPU'">
     <DocumentationFile>bin\Debug\net471\SwitchesAPI.xml</DocumentationFile>
   </PropertyGroup>
 

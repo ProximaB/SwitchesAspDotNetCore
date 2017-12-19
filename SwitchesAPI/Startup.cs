@@ -14,7 +14,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using SwitchesAPI.DB;
 
-namespace MoviesAPI
+namespace SwitchesAPI
 {
     public class Startup
     {
@@ -38,7 +38,7 @@ namespace MoviesAPI
                 c.SwaggerDoc("v1", new Info { Version = "v1", Title = "Switches API", });
                 c.CustomSchemaIds(i => i.FullName);
                 var basePath = System.AppContext.BaseDirectory;
-                var xmlPath = Path.Combine(basePath, "MoviesAPI.xml");
+                var xmlPath = Path.Combine(basePath, "SwitchesAPI.xml");
                 c.IncludeXmlComments(xmlPath);
             });
         }

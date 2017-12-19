@@ -28,7 +28,7 @@ namespace SwitchesAPI.Services
             return context.Rooms.Find(id);
         }
 
-        public List<Switch> GetByRoomId(int roomId)
+        public List<Switch> GetSwitchesByRoomId(int roomId)
         {
             var room = context.Rooms.Where(r => r.Id == roomId).SingleOrDefault();
             if(room == null)
@@ -58,9 +58,9 @@ namespace SwitchesAPI.Services
             return true;
         }
 
-        public bool UpdateRoom(Room room)
+        public bool UpdateRoom(int roomId, Room room)
         {
-            Room foundRoom = GetById(room.Id);
+            Room foundRoom = GetById(roomId);
 
             if (foundRoom == null)
             {

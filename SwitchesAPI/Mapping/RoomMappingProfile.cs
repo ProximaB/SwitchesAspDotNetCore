@@ -13,7 +13,7 @@ namespace SwitchesAPI.Mapping
             CreateMap<RoomRequestPut, Room>();
 
             CreateMap<Room, RoomResponse>();
-            CreateMap<List<Room>, List<RoomResponse>>();
+           // CreateMap<List<Room>, List<RoomResponse>>();
         }
     }
 }

@@ -16,14 +16,14 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "MoviesAPI": {
+    "SwitchesAPI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "/Swagger",
+      "launchUrl": "Swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:57494/"
+      "applicationUrl": "http://localhost:57493/"
     }
   }
 }

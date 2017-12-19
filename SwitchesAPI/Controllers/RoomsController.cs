@@ -5,7 +5,7 @@ using SwitchesAPI.Interfaces;
 using SwitchesAPI.Models;
 using System.Collections.Generic;
 
-namespace MoviesAPI.Controllers
+namespace SwitchesAPI.Controllers
 {
     [Route("api/[controller]")]
     public class RoomsController : Controller
@@ -50,18 +50,17 @@ namespace MoviesAPI.Controllers
         /// Get List of switches
         /// </summary>
         /// <param name="roomId">room id</param>
-        /// <returns>Room if exist</returns>
+        /// <returns>Room's switches if exist</returns>
         [HttpGet("{roomId}/Switches")]
         [ExecutionTime]
         public IActionResult GetReviews(int roomId)
         {
-            var rooms = _roomsService.GetByRoomId(roomId);
-            if (rooms == null)
+            var switches = _roomsService.GetSwitchesByRoomId(roomId);
+            if (switches == null)
             {
                 return NotFound();
             }
-
-            return Ok(AutoMapper.Mapper.Map<List<RoomResponse>>(rooms));
+            return Ok(AutoMapper.Mapper.Map<List<SwitchResponse>>(switches));
         }
 
         /// <summary>
@@ -86,16 +85,25 @@ namespace MoviesAPI.Controllers
         /// </summary>
         /// <param name="room">updated room</param>
         /// <returns></returns>
-        [HttpPut]
-        public IActionResult Put([FromBody]RoomRequestPut room)
+        [HttpPut("{roomId}")]
+        public IActionResult Put(int roomId, [FromBody] RoomRequest room)
         {
-            if (_roomsService.UpdateRoom(AutoMapper.Mapper.Map<Room>(room)))
+            if (_roomsService.UpdateRoom(roomId, AutoMapper.Mapper.Map<Room>(room)))
             {
                 return Ok();
             }
 
             return BadRequest();
         }
+        //public IActionResult Put([FromBody]RoomRequestPut room)
+        //{
+        //    if (_roomsService.UpdateRoom(AutoMapper.Mapper.Map<Room>(room)))
+        //    {
+        //        return Ok();
+        //    }
+
+        //    return BadRequest();
+        //}
 
         /// <summary>
         /// Delete room

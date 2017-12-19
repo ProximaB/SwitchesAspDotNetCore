@@ -118,7 +118,7 @@ namespace SwitchesAPI.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            return NoContent();
         }
     }
 }

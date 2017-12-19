@@ -91,11 +91,11 @@ namespace SwitchesAPI.Services
                 return false;
             }
 
-            var switches = room.Switches;
-            foreach (var sw in switches)
-            {
-                context.Switches.Remove(sw);
-            }
+            //var switches = room.Switches;
+            //foreach (var sw in switches)
+            //{
+            //    context.Switches.Remove(sw);
+            //}
 
             context.Rooms.Remove(room);
             context.SaveChanges();

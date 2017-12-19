@@ -32,7 +32,6 @@ namespace SwitchesAPI
             services.AddScoped<IRoomsService, RoomsService>();
             services.AddScoped<SwitchesContext>();
 
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Version = "v1", Title = "Switches API", });

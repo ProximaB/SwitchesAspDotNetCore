@@ -87,6 +87,28 @@ namespace SwitchesAPI.Controllers
         }
 
         /// <summary>
+        /// Update state of switch by Id.
+        /// </summary>
+        /// <param name="switchId">Updated switch Id</param>
+        /// <param name="state">state of Switch [ON/OFF]</param>
+        /// <returns></returns>
+        [HttpPut("{switchId}/{state}")]
+        public IActionResult Put(int switchId, string state)
+        {
+            var _switch = _switchesService.GetById(switchId);
+
+            if (_switch.State == state) return NoContent();
+            else _switch.State = state;
+
+            if (_switchesService.UpdateSwitch(_switch))
+            {
+                return NoContent();
+            }
+
+            return BadRequest("State can only be \"ON\" or \"OFF\"");
+        }
+
+        /// <summary>
         /// Delete switch from repositorium
         /// </summary>
         /// <param name="switchId">switch identifier</param>

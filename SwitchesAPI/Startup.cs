@@ -13,6 +13,7 @@ using System.Reflection;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using SwitchesAPI.DB;
+using System.Web.Http.Cors;
 
 namespace SwitchesAPI
 {
@@ -23,6 +24,8 @@ namespace SwitchesAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddCors();
 
             services.AddAutoMapper(
                 opt => opt.CreateMissingTypeMaps = true,
@@ -49,6 +52,11 @@ namespace SwitchesAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost")
+                    .AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+            );
 
             app.UseMvc();
 

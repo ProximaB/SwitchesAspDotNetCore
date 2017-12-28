@@ -4,6 +4,7 @@ using SwitchesAPI.Filters;
 using SwitchesAPI.Interfaces;
 using SwitchesAPI.Models;
 using System.Collections.Generic;
+using System.Web.Http.Cors;
 
 namespace SwitchesAPI.Controllers
 {

@@ -7,10 +7,9 @@ namespace SwitchesAPI.DB.DbModels
 {
     public class Room
     {
-        [Required]
         public int Id { get; set; }
 
-        [Key, Required]
+       [Key]
         public string RoomId { get; set; }
 
         [Required]

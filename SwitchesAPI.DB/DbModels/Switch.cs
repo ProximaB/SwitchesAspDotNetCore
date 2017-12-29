@@ -7,7 +7,7 @@ namespace SwitchesAPI.DB.DbModels
   
     public class Switch
     {
-        [Required]
+        //[Required]
         public int Id { get; set; }
 
         [Required]
@@ -21,7 +21,8 @@ namespace SwitchesAPI.DB.DbModels
         [Column("Last modified DateTime", TypeName = "DateTime2")]
         public DateTime LastModifieDateTime { get; set; }
 
-        public string RoomId { get; set; }
+        //[ForeignKey("Room")]
+        //public string RoomId { get; set; }
 
         public virtual Room Room { get; set; }
     }

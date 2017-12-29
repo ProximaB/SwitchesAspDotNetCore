@@ -7,18 +7,18 @@ namespace SwitchesAPI.DB.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Rooms_Id_string_gerated : IMigrationMetadata
+    public sealed partial class Generated_Key_Lint : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Rooms_Id_string_gerated));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Generated_Key_Lint));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712291611428_Rooms_Id_string_gerated"; }
+            get { return "201712291913066_Generated_Key_Lint"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

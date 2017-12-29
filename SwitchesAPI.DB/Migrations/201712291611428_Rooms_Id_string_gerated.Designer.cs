@@ -13,12 +13,12 @@ namespace SwitchesAPI.DB.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201712290011428_Rooms_Id_string_gerated"; }
+            get { return "201712291611428_Rooms_Id_string_gerated"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return null; }
+            get { return Resources.GetString("Source"); }
         }
         
         string IMigrationMetadata.Target

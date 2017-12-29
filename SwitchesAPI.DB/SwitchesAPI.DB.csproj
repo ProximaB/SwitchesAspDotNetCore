@@ -91,9 +91,9 @@
     <Compile Include="Migrations\201712191711094_Reset.Designer.cs">
       <DependentUpon>201712191711094_Reset.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712290011428_Rooms_Id_string_gerated.cs" />
-    <Compile Include="Migrations\201712290011428_Rooms_Id_string_gerated.Designer.cs">
-      <DependentUpon>201712290011428_Rooms_Id_string_gerated.cs</DependentUpon>
+    <Compile Include="Migrations\201712291611428_Rooms_Id_string_gerated.cs" />
+    <Compile Include="Migrations\201712291611428_Rooms_Id_string_gerated.Designer.cs">
+      <DependentUpon>201712291611428_Rooms_Id_string_gerated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SwitchesContext.cs" />
@@ -128,8 +128,8 @@
     <EmbeddedResource Include="Migrations\201712191711094_Reset.resx">
       <DependentUpon>201712191711094_Reset.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712290011428_Rooms_Id_string_gerated.resx">
-      <DependentUpon>201712290011428_Rooms_Id_string_gerated.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712291611428_Rooms_Id_string_gerated.resx">
+      <DependentUpon>201712291611428_Rooms_Id_string_gerated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

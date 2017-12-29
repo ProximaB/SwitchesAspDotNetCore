@@ -5,7 +5,7 @@ namespace SwitchesAPI.DB
 {
     public class SwitchesContext : DbContext
     {
-        public SwitchesContext() : base("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SwitchesAPIDb;Integrated Security=True")
+        public SwitchesContext() : base("Data Source=(localdb)\\ProjectsV13;Initial Catalog=SwitchesAPIDb2;Integrated Security=True")
         {
         }
 

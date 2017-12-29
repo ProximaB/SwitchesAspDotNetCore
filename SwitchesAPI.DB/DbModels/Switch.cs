@@ -21,7 +21,6 @@ namespace SwitchesAPI.DB.DbModels
         [Column("Last modified DateTime", TypeName = "DateTime2")]
         public DateTime LastModifieDateTime { get; set; }
 
-        [Required]
         public string RoomId { get; set; }
 
         public virtual Room Room { get; set; }

@@ -14,6 +14,6 @@ namespace SwitchesAPI.Models
 
         public DateTime LastModiDateTime { get; set; }
 
-        public int RoomId { get; set; }
+        public string RoomId { get; set; }
     }
 }

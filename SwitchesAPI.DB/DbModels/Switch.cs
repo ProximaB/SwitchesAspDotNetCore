@@ -22,7 +22,7 @@ namespace SwitchesAPI.DB.DbModels
         public DateTime LastModifieDateTime { get; set; }
 
         [Required]
-        public int RoomId { get; set; }
+        public string RoomId { get; set; }
 
         public virtual Room Room { get; set; }
     }

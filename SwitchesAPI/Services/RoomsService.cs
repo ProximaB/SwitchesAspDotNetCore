@@ -6,6 +6,7 @@ using SwitchesAPI.DB.DbModels;
 using SwitchesAPI.Interfaces;
 using SwitchesAPI.Common;
 using SwitchesAPI.DB;
+using System.Text;
 
 namespace SwitchesAPI.Services
 {
@@ -23,14 +24,15 @@ namespace SwitchesAPI.Services
             return this.context.Rooms.ToList();
         }
 
-        public Room GetById(int id)
+        public Room GetById(string id)
         {
-            return context.Rooms.Find(id);
+            //return context.Rooms.Find(id);
+            return context.Rooms.Where(x => x.RoomId == id).FirstOrDefault();
         }
 
-        public List<Switch> GetSwitchesByRoomId(int roomId)
+        public List<Switch> GetSwitchesByRoomId(string roomId)
         {
-            var room = context.Rooms.Where(r => r.Id == roomId).SingleOrDefault();
+            var room = context.Rooms.Where(r => r.RoomId == roomId).SingleOrDefault();
             if(room == null)
             {
                 return null;
@@ -39,11 +41,24 @@ namespace SwitchesAPI.Services
             return room.Switches.ToList();
         }
 
-        public bool AddNewRoom(Room room)
+        public bool AddNewRoom(Room room, out string Id)
         {
+            StringBuilder builder = new StringBuilder();
+            Enumerable
+               .Range(65, 26)
+                .Select(e => ((char)e).ToString())
+                .Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
+                .Concat(Enumerable.Range(0, 10).Select(e => e.ToString()))
+                .OrderBy(e => Guid.NewGuid())
+                .Take(11)
+                .ToList().ForEach(e => builder.Append(e));
+            Id = builder.ToString();
+
+
             if (room == null) return false;
 
             room.LastModiDateTime = DateTime.Now;
+            room.RoomId = Id;
             context.Rooms.Add(room);
         
             try
@@ -58,7 +73,7 @@ namespace SwitchesAPI.Services
             return true;
         }
 
-        public bool UpdateRoom(int roomId, Room room)
+        public bool UpdateRoom(string roomId, Room room)
         {
             Room foundRoom = GetById(roomId);
 
@@ -83,7 +98,7 @@ namespace SwitchesAPI.Services
             return true;
         }
 
-        public bool Delete(int roomId)
+        public bool Delete(string roomId)
         {
             Room room = GetById(roomId);
             if (room == null)

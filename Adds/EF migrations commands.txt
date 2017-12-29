@@ -10,7 +10,10 @@ Update-Database -StartUpProjectName SwitchesAPI.DB
 
 
 
-Add-Migration {Improves} -StartUpProjectName SwitchesAPI.DB
+Add-Migration {Rooms_Id_string_gerated} -StartUpProjectName SwitchesAPI.DB
+
+Update-Database –TargetMigration:201712191711094_Reset
+Update-Database -StartUpProjectName SwitchesAPI.DB –TargetMigration:201712191711094_Reset
 
 
 

@@ -64,7 +64,7 @@ namespace SwitchesAPI.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            return Ok(_switch);
 
         }
 
@@ -81,7 +81,7 @@ namespace SwitchesAPI.Controllers
             _switch.Id = switchId;
             if (_switchesService.UpdateSwitch(_switch))
             {
-                return NoContent();
+                return Ok(switchRequest);
             }
 
             return BadRequest();

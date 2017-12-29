@@ -7,14 +7,14 @@ namespace SwitchesAPI.Interfaces
     {
         List<Room> GetAll();
 
-        Room GetById(int id);
+        Room GetById(string id);
 
-        List<Switch> GetSwitchesByRoomId(int roomId);
+        List<Switch> GetSwitchesByRoomId(string roomId);
 
-        bool AddNewRoom(Room room);
+        bool AddNewRoom(Room room, out string Id);
 
-        bool UpdateRoom(int roomId, Room room);
+        bool UpdateRoom(string roomId, Room room);
 
-        bool Delete(int roomId);
+        bool Delete(string roomId);
     }
 }

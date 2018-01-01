@@ -34,7 +34,7 @@ namespace SwitchesAPI.Controllers
         /// <param name="roomId">Room id</param>
         /// <returns>Room if exist</returns>
         [HttpGet("{roomId}")]
-        public IActionResult Get(string roomId)
+        public IActionResult Get(int roomId)
         {
             Room room = _roomsService.GetById(roomId);
 
@@ -53,14 +53,14 @@ namespace SwitchesAPI.Controllers
         /// <returns>Room's switches if exist</returns>
         [HttpGet("{roomId}/Switches")]
         [ExecutionTime]
-        public IActionResult GetReviews(string roomId)
+        public IActionResult GetReviews(int roomId)
         {
             var switches = _roomsService.GetSwitchesByRoomId(roomId);
             if (switches == null)
             {
                 return NotFound();
             }
-            return Ok(switches);
+            return Ok(AutoMapper.Mapper.Map<SwitchResponse>(switches));
         }
 
         /// <summary>
@@ -72,12 +72,13 @@ namespace SwitchesAPI.Controllers
         [SwitchApiExceptionFilter]
         public IActionResult Post([FromBody]RoomRequest room)
         {
-            if (!_roomsService.AddNewRoom(AutoMapper.Mapper.Map<Room>(room), out string Id))
+            if (!_roomsService.AddNewRoom(AutoMapper.Mapper.Map<Room>(room), out string uniqueStr))
             {
                 return BadRequest();
             }
+            Room _room = _roomsService.GetByUniqueStr(uniqueStr);         
 
-            return Ok(_roomsService.GetById(Id));
+            return Ok(AutoMapper.Mapper.Map<RoomResponse>(_room));
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace SwitchesAPI.Controllers
         /// <param name="room">updated room</param>
         /// <returns></returns>
         [HttpPut("{roomId}")]
-        public IActionResult Put(string roomId, [FromBody] RoomRequest room)
+        public IActionResult Put(int roomId, [FromBody] RoomRequest room)
         {
             if (_roomsService.UpdateRoom(roomId, AutoMapper.Mapper.Map<Room>(room)))
             {
@@ -111,14 +112,14 @@ namespace SwitchesAPI.Controllers
         /// <param name="roomId"> room identifier</param>
         /// <returns></returns>
         [HttpDelete("{roomId}")]
-        public IActionResult Delete(string roomId)
+        public IActionResult Delete(int roomId)
         {
             if (!_roomsService.Delete(roomId))
             {
                 return BadRequest();
             }
 
-            return NoContent();
+            return Ok();
         }
     }
 }

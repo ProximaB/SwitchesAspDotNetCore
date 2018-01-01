@@ -7,12 +7,13 @@ namespace SwitchesAPI.Interfaces
     {
         List<Switch> GetAll();
 
-        Switch GetById(int id);
+        Switch GetById(int switchId);
 
-        bool AddNewSwitch(Switch _switch);
+        bool AddNewSwitch(Switch _switch, out string uniqueStr);
 
         bool UpdateSwitch(Switch _switch);
 
-        bool Delete(int switchID);
+        bool Delete(int switchId);
+        Switch GetByUniqueStr(string uniqueStr);
     }
 }

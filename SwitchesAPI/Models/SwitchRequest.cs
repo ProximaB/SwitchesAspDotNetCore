@@ -12,6 +12,7 @@ namespace SwitchesAPI.Models
         [Required]
         public string State { get; set; }
 
-        public string RoomId { get; set; }
+        [Required]
+        public int RoomId { get; set; }
     }
 }

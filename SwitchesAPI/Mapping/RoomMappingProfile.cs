@@ -10,10 +10,7 @@ namespace SwitchesAPI.Mapping
         public RoomMappingProfile()
         {
             CreateMap<RoomRequest, Room>();
-            CreateMap<RoomRequestPut, Room>();
-
             CreateMap<Room, RoomResponse>();
-           // CreateMap<List<Room>, List<RoomResponse>>();
         }
     }
 }

@@ -91,9 +91,9 @@
     <Compile Include="Migrations\201712191711094_Reset.Designer.cs">
       <DependentUpon>201712191711094_Reset.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712291913066_Generated_Key_Lint.cs" />
-    <Compile Include="Migrations\201712291913066_Generated_Key_Lint.Designer.cs">
-      <DependentUpon>201712291913066_Generated_Key_Lint.cs</DependentUpon>
+    <Compile Include="Migrations\201801012338358_newInitialMigration.cs" />
+    <Compile Include="Migrations\201801012338358_newInitialMigration.Designer.cs">
+      <DependentUpon>201801012338358_newInitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SwitchesContext.cs" />
@@ -128,9 +128,12 @@
     <EmbeddedResource Include="Migrations\201712191711094_Reset.resx">
       <DependentUpon>201712191711094_Reset.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712291913066_Generated_Key_Lint.resx">
-      <DependentUpon>201712291913066_Generated_Key_Lint.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801012338358_newInitialMigration.resx">
+      <DependentUpon>201801012338358_newInitialMigration.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\Old_migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

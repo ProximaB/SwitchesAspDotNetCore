@@ -4,6 +4,7 @@ using System.Linq;
 using SwitchesAPI.DB.DbModels;
 using SwitchesAPI.Interfaces;
 using SwitchesAPI.DB;
+using SwitchesAPI.Extensions;
 
 namespace SwitchesAPI.Services
 {
@@ -21,15 +22,18 @@ namespace SwitchesAPI.Services
             return _context.Switches.ToList();
         }
 
-        public Switch GetById(int id)
+        public Switch GetById(int switchId)
         {
-            return _context.Switches.Find(id);
+            return _context.Switches.Find(switchId);
         }
 
-        public bool AddNewSwitch(Switch _switch)
+        public bool AddNewSwitch(Switch _switch, out string uniqueStr)
         {
+            uniqueStr = String.Empty.IdBuilder(11);
+
             if (_switch == null) return false;
 
+            _switch.UniqueStr = uniqueStr;
             _switch.LastModifieDateTime = DateTime.Now;
             _context.Switches.Add(_switch);
 
@@ -94,6 +98,11 @@ namespace SwitchesAPI.Services
             }
 
             return true;
+        }
+
+        public Switch GetByUniqueStr(string uniqueStr)
+        {
+            return _context.Switches.Where(s => s.UniqueStr == uniqueStr).FirstOrDefault();
         }
     }
 }

@@ -59,12 +59,14 @@ namespace SwitchesAPI.Controllers
         [ModelValidationAttribute]
         public IActionResult Post([FromBody]SwitchRequest _switch)
         {
-            if (!_switchesService.AddNewSwitch(AutoMapper.Mapper.Map<Switch>(_switch)))
+            if (!_switchesService.AddNewSwitch(AutoMapper.Mapper.Map<Switch>(_switch), out string uniqueStr))
             {
                 return BadRequest();
             }
 
-            return Ok(_switch);
+            var sw =_switchesService.GetByUniqueStr(uniqueStr);
+
+            return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
 
         }
 

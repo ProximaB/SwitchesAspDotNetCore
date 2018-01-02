@@ -3,7 +3,7 @@ namespace SwitchesAPI.DB.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial_Switches_Migration : DbMigration
+    public partial class Init_mig : DbMigration
     {
         public override void Up()
         {
@@ -12,25 +12,29 @@ namespace SwitchesAPI.DB.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Unique_String = c.String(maxLength: 11),
                         Name = c.String(nullable: false),
                         Description = c.String(),
-                        CreateDate = c.DateTime(nullable: false, storeType: "date"),
+                        LastmodifiedDateTime = c.DateTime(name: "Last modified DateTime", nullable: false, precision: 7, storeType: "datetime2"),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Unique_String, unique: true);
             
             CreateTable(
                 "dbo.Switches",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Unique_String = c.String(maxLength: 11),
                         Name = c.String(nullable: false),
                         Description = c.String(),
                         State = c.String(nullable: false),
-                        CreateDate = c.DateTime(nullable: false, storeType: "date"),
+                        LastmodifiedDateTime = c.DateTime(name: "Last modified DateTime", nullable: false, precision: 7, storeType: "datetime2"),
                         RoomId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Rooms", t => t.RoomId, cascadeDelete: true)
+                .Index(t => t.Unique_String, unique: true)
                 .Index(t => t.RoomId);
             
         }
@@ -39,6 +43,8 @@ namespace SwitchesAPI.DB.Migrations
         {
             DropForeignKey("dbo.Switches", "RoomId", "dbo.Rooms");
             DropIndex("dbo.Switches", new[] { "RoomId" });
+            DropIndex("dbo.Switches", new[] { "Unique_String" });
+            DropIndex("dbo.Rooms", new[] { "Unique_String" });
             DropTable("dbo.Switches");
             DropTable("dbo.Rooms");
         }

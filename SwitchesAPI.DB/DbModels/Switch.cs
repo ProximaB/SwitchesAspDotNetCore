@@ -4,11 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SwitchesAPI.DB.DbModels
 {
-  
     public class Switch
     {
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column("Id")]
         public int Id { get; set; }
+
+        [Index(IsUnique = true), Column("Unique String"), MaxLength(11)]
+        public string UniqueStr { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -21,8 +24,8 @@ namespace SwitchesAPI.DB.DbModels
         [Column("Last modified DateTime", TypeName = "DateTime2")]
         public DateTime LastModifieDateTime { get; set; }
 
-        [Required]
-        public string RoomId { get; set; }
+        [ForeignKey("Room"), Required]
+        public int RoomId { get; set; }
 
         public virtual Room Room { get; set; }
     }

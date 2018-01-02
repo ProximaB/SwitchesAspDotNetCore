@@ -56,15 +56,16 @@ namespace SwitchesAPI.Controllers
         /// <param name="_switch">new switch</param>
         /// <returns></returns>
         [HttpPost]
-        [ModelValidationAttribute]
+        [ModelValidation]
         public IActionResult Post([FromBody]SwitchRequest _switch)
         {
-            if (!_switchesService.AddNewSwitch(AutoMapper.Mapper.Map<Switch>(_switch)))
+            if (!_switchesService.AddNewSwitch(AutoMapper.Mapper.Map<Switch>(_switch), out string uniqueStr))
             {
                 return BadRequest();
             }
 
-            return Ok(_switch);
+            var sw =_switchesService.GetByUniqueStr(uniqueStr);
+            return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
 
         }
 
@@ -79,12 +80,16 @@ namespace SwitchesAPI.Controllers
         {
             var _switch = AutoMapper.Mapper.Map<Switch>(switchRequest);
             _switch.Id = switchId;
-            if (_switchesService.UpdateSwitch(_switch))
+
+            if (!_switchesService.UpdateSwitch(_switch))
             {
-                return Ok(switchRequest);
+                return BadRequest();
             }
 
-            return BadRequest();
+            // var sw = _switchesService.GetById(switchId);
+            // return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
+            return Get(switchId);
+
         }
 
         /// <summary>
@@ -98,15 +103,20 @@ namespace SwitchesAPI.Controllers
         {
             var _switch = _switchesService.GetById(switchId);
 
-            if (_switch.State == state) return NoContent();
-            else _switch.State = state;
-
-            if (_switchesService.UpdateSwitch(_switch))
+            if (_switch.State == state)
             {
                 return NoContent();
             }
+            else _switch.State = state;
 
-            return BadRequest("State can only be \"ON\" or \"OFF\"");
+            //if (!_switchesService.UpdateSwitch(_switch))
+            //{
+            //    return BadRequest("State can only be \"ON\" or \"OFF\")");
+            //}
+
+            //var sw = _switchesService.GetById(switchId);
+            //return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
+            return Get(switchId);
         }
 
         /// <summary>

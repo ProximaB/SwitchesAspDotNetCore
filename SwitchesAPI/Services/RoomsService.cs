@@ -7,6 +7,7 @@ using SwitchesAPI.Interfaces;
 using SwitchesAPI.Common;
 using SwitchesAPI.DB;
 using System.Text;
+using SwitchesAPI.Extensions;
 
 namespace SwitchesAPI.Services
 {
@@ -24,15 +25,15 @@ namespace SwitchesAPI.Services
             return this.context.Rooms.ToList();
         }
 
-        public Room GetById(string id)
+        public Room GetById(int roomId)
         {
             //return context.Rooms.Find(id);
-            return context.Rooms.Where(x => x.RoomId == id).FirstOrDefault();
+            return context.Rooms.Where(x => x.Id == roomId).FirstOrDefault();
         }
 
-        public List<Switch> GetSwitchesByRoomId(string roomId)
+        public List<Switch> GetSwitchesByRoomId(int roomId)
         {
-            var room = context.Rooms.Where(r => r.RoomId == roomId).SingleOrDefault();
+            var room = context.Rooms.Where(r => r.Id == roomId).SingleOrDefault();
             if(room == null)
             {
                 return null;
@@ -41,24 +42,15 @@ namespace SwitchesAPI.Services
             return room.Switches.ToList();
         }
 
-        public bool AddNewRoom(Room room, out string Id)
+        public bool AddNewRoom(Room room, out string uniqueStr)
         {
-            StringBuilder builder = new StringBuilder();
-            Enumerable
-               .Range(65, 26)
-                .Select(e => ((char)e).ToString())
-                .Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
-                .Concat(Enumerable.Range(0, 10).Select(e => e.ToString()))
-                .OrderBy(e => Guid.NewGuid())
-                .Take(11)
-                .ToList().ForEach(e => builder.Append(e));
-            Id = builder.ToString();
 
+            uniqueStr = string.Empty.IdBuilder(11);
 
             if (room == null) return false;
 
             room.LastModiDateTime = DateTime.Now;
-            room.RoomId = Id;
+            room.UniqueStr = uniqueStr;
             context.Rooms.Add(room);
         
             try
@@ -73,7 +65,7 @@ namespace SwitchesAPI.Services
             return true;
         }
 
-        public bool UpdateRoom(string roomId, Room room)
+        public bool UpdateRoom(int roomId, Room room)
         {
             Room foundRoom = GetById(roomId);
 
@@ -98,7 +90,7 @@ namespace SwitchesAPI.Services
             return true;
         }
 
-        public bool Delete(string roomId)
+        public bool Delete(int roomId)
         {
             Room room = GetById(roomId);
             if (room == null)
@@ -106,16 +98,21 @@ namespace SwitchesAPI.Services
                 return false;
             }
 
-            //var switches = room.Switches;
-            //foreach (var sw in switches)
-            //{
-            //    context.Switches.Remove(sw);
-            //}
-
-            context.Rooms.Remove(room);
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+                return false;
+            }
 
             return true;
+        }
+
+        public Room GetByUniqueStr(string uniqueStr)
+        {
+            return context.Rooms.Where(s => s.UniqueStr == uniqueStr).FirstOrDefault();
         }
     }
 }

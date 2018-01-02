@@ -94,8 +94,9 @@ namespace SwitchesAPI.Controllers
                 return BadRequest();
             }
 
-            Room _room = _roomsService.GetById(roomId);
-            return Ok(AutoMapper.Mapper.Map<List<RoomResponse>>(_room));           
+            //Room _room = _roomsService.GetById(roomId);
+            // return Ok(AutoMapper.Mapper.Map<List<RoomResponse>>(_room));   
+            return Get(roomId);
         }
         //public IActionResult Put([FromBody]RoomRequestPut room)
         //{

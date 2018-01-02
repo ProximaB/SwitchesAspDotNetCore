@@ -86,8 +86,9 @@ namespace SwitchesAPI.Controllers
                 return BadRequest();
             }
 
-            var sw = _switchesService.GetById(switchId);
-            return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
+            // var sw = _switchesService.GetById(switchId);
+            // return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
+            return Get(switchId);
 
         }
 
@@ -108,13 +109,14 @@ namespace SwitchesAPI.Controllers
             }
             else _switch.State = state;
 
-            if (!_switchesService.UpdateSwitch(_switch))
-            {
-                return BadRequest("State can only be \"ON\" or \"OFF\")");
-            }
+            //if (!_switchesService.UpdateSwitch(_switch))
+            //{
+            //    return BadRequest("State can only be \"ON\" or \"OFF\")");
+            //}
 
-            var sw = _switchesService.GetById(switchId);
-            return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
+            //var sw = _switchesService.GetById(switchId);
+            //return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
+            return Get(switchId);
         }
 
         /// <summary>

@@ -76,8 +76,8 @@ namespace SwitchesAPI.Controllers
             {
                 return BadRequest();
             }
-            Room _room = _roomsService.GetByUniqueStr(uniqueStr);         
 
+            Room _room = _roomsService.GetByUniqueStr(uniqueStr);         
             return Ok(AutoMapper.Mapper.Map<RoomResponse>(_room));
         }
 
@@ -89,12 +89,13 @@ namespace SwitchesAPI.Controllers
         [HttpPut("{roomId}")]
         public IActionResult Put(int roomId, [FromBody] RoomRequest room)
         {
-            if (_roomsService.UpdateRoom(roomId, AutoMapper.Mapper.Map<Room>(room)))
+            if (!_roomsService.UpdateRoom(roomId, AutoMapper.Mapper.Map<Room>(room)))
             {
-                return Ok(AutoMapper.Mapper.Map<List<RoomResponse>>(room));
+                return BadRequest();
             }
 
-            return BadRequest();
+            Room _room = _roomsService.GetById(roomId);
+            return Ok(AutoMapper.Mapper.Map<List<RoomResponse>>(_room));           
         }
         //public IActionResult Put([FromBody]RoomRequestPut room)
         //{

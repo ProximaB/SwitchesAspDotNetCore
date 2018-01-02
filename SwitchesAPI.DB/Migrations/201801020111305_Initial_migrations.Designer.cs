@@ -7,13 +7,13 @@ namespace SwitchesAPI.DB.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Initial_Switches_Migration : IMigrationMetadata
+    public sealed partial class Initial_migrations : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial_Switches_Migration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial_migrations));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712121709084_Initial_Switches_Migration"; }
+            get { return "201801020111305_Initial_migrations"; }
         }
         
         string IMigrationMetadata.Source

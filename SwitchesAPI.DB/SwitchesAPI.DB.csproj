@@ -59,13 +59,9 @@
   <ItemGroup>
     <Compile Include="DbModels\Switch.cs" />
     <Compile Include="DbModels\Room.cs" />
-    <Compile Include="Migrations\201801020109192_Init_mig.cs" />
-    <Compile Include="Migrations\201801020109192_Init_mig.Designer.cs">
-      <DependentUpon>201801020109192_Init_mig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801020111305_Initial_migrations.cs" />
-    <Compile Include="Migrations\201801020111305_Initial_migrations.Designer.cs">
-      <DependentUpon>201801020111305_Initial_migrations.cs</DependentUpon>
+    <Compile Include="Migrations\201801022202480_Initial_Migrations.cs" />
+    <Compile Include="Migrations\201801022202480_Initial_Migrations.Designer.cs">
+      <DependentUpon>201801022202480_Initial_Migrations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SwitchesContext.cs" />
@@ -76,11 +72,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801020109192_Init_mig.resx">
-      <DependentUpon>201801020109192_Init_mig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801020111305_Initial_migrations.resx">
-      <DependentUpon>201801020111305_Initial_migrations.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801022202480_Initial_Migrations.resx">
+      <DependentUpon>201801022202480_Initial_Migrations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

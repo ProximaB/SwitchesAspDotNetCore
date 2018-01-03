@@ -13,7 +13,7 @@ namespace SwitchesAPI.DB.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         UniqueString = c.String(maxLength: 11),
-                        Name = c.String(nullable: false),
+                        Name = c.String(nullable: false), //testing
                         Description = c.String(),
                         LastmodifiedDateTime = c.DateTime(name: "Last modified DateTime", nullable: false, precision: 7, storeType: "datetime2"),
                     })
@@ -34,7 +34,7 @@ namespace SwitchesAPI.DB.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Rooms", t => t.RoomId, cascadeDelete: true)
-                .Index(t => t.UniqueString, unique: true)
+                .Index(t => t.UniqueString, unique: false) //
                 .Index(t => t.RoomId);
             
         }

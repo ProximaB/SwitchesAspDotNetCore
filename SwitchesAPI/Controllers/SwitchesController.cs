@@ -9,12 +9,12 @@ using System.Web.Http.Cors;
 namespace SwitchesAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class SwitchController : Controller
+    public class SwitchesController : Controller
     {
         private readonly ISwitchesService _switchesService;
         private readonly IRoomsService _roomsService;
 
-        public SwitchController(ISwitchesService switchesService, IRoomsService roomsServices)
+        public SwitchesController(ISwitchesService switchesService, IRoomsService roomsServices)
         {
             _switchesService = switchesService;
             _roomsService = roomsServices;
@@ -107,7 +107,12 @@ namespace SwitchesAPI.Controllers
             {
                 return NoContent();
             }
-            else _switch.State = state;
+
+            _switch.State = state;
+            if (!_switchesService.UpdateSwitch(_switch))
+            {
+                return BadRequest();
+            }
 
             //if (!_switchesService.UpdateSwitch(_switch))
             //{

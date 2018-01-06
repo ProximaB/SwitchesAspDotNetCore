@@ -60,7 +60,7 @@ namespace SwitchesAPI.Controllers
             {
                 return NotFound();
             }
-            return Ok(AutoMapper.Mapper.Map<SwitchResponse>(switches));
+            return Ok(AutoMapper.Mapper.Map<List<SwitchResponse>>(switches));
         }
 
         /// <summary>

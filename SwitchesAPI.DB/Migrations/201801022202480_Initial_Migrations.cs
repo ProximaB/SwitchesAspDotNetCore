@@ -3,7 +3,7 @@ namespace SwitchesAPI.DB.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Init_mig : DbMigration
+    public partial class Initial_Migrations : DbMigration
     {
         public override void Up()
         {
@@ -12,20 +12,20 @@ namespace SwitchesAPI.DB.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Unique_String = c.String(maxLength: 11),
-                        Name = c.String(nullable: false),
+                        UniqueString = c.String(maxLength: 11),
+                        Name = c.String(nullable: false), //testing
                         Description = c.String(),
                         LastmodifiedDateTime = c.DateTime(name: "Last modified DateTime", nullable: false, precision: 7, storeType: "datetime2"),
                     })
                 .PrimaryKey(t => t.Id)
-                .Index(t => t.Unique_String, unique: true);
+                .Index(t => t.UniqueString, unique: true);
             
             CreateTable(
                 "dbo.Switches",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Unique_String = c.String(maxLength: 11),
+                        UniqueString = c.String(maxLength: 11),
                         Name = c.String(nullable: false),
                         Description = c.String(),
                         State = c.String(nullable: false),
@@ -34,7 +34,7 @@ namespace SwitchesAPI.DB.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Rooms", t => t.RoomId, cascadeDelete: true)
-                .Index(t => t.Unique_String, unique: true)
+                .Index(t => t.UniqueString, unique: false) //
                 .Index(t => t.RoomId);
             
         }
@@ -43,8 +43,8 @@ namespace SwitchesAPI.DB.Migrations
         {
             DropForeignKey("dbo.Switches", "RoomId", "dbo.Rooms");
             DropIndex("dbo.Switches", new[] { "RoomId" });
-            DropIndex("dbo.Switches", new[] { "Unique_String" });
-            DropIndex("dbo.Rooms", new[] { "Unique_String" });
+            DropIndex("dbo.Switches", new[] { "UniqueString" });
+            DropIndex("dbo.Rooms", new[] { "UniqueString" });
             DropTable("dbo.Switches");
             DropTable("dbo.Rooms");
         }

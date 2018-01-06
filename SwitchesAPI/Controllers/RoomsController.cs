@@ -53,7 +53,7 @@ namespace SwitchesAPI.Controllers
         /// <returns>Room's switches if exist</returns>
         [HttpGet("{roomId}/Switches")]
         [ExecutionTime]
-        public IActionResult GetReviews(int roomId)
+        public IActionResult GetSwitches(int roomId)
         {
             var switches = _roomsService.GetSwitchesByRoomId(roomId);
             if (switches == null)

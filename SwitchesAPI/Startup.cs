@@ -14,6 +14,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using SwitchesAPI.DB;
 using System.Web.Http.Cors;
+using SwitchesAPI.Middlewares;
 
 namespace SwitchesAPI
 {
@@ -33,7 +34,7 @@ namespace SwitchesAPI
 
             services.AddScoped<ISwitchesService, SwitchesService>();
             services.AddScoped<IRoomsService, RoomsService>();
-            services.AddScoped<SwitchesContext>();
+            services.AddScoped<SwitchesContext>();           
 
             services.AddSwaggerGen(c =>
             {
@@ -57,6 +58,9 @@ namespace SwitchesAPI
                 builder.WithOrigins("http://localhost")
                     .AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
             );
+
+            app.UseWebSockets();
+            app.UseWebSocketHandler();
 
             app.UseMvc();
 

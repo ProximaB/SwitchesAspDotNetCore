@@ -18,6 +18,7 @@ namespace SwitchesAPI.Managers.WebSocketManagers
 
         public ConcurrentDictionary<string, WebSocket> GetAll()
         {
+            Console.WriteLine($"WebSocketsDicLength: {_sockets.Count()}");
             return _sockets;
         }
 

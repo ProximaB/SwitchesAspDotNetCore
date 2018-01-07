@@ -45,11 +45,18 @@ namespace SwitchesAPI.Handlers.WebSocketsHandlers
         }
 
         public async Task SendMessageToAllAsync(string message)
-        {
+        { 
             foreach (var pair in WebSocketConnectionManager.GetAll())
             {
-                if (pair.Value.State == WebSocketState.Open)
-                    await SendMessageAsync(pair.Value, message);
+                try
+                {
+                    if (pair.Value.State == WebSocketState.Open)
+                        await SendMessageAsync(pair.Value, message);
+                }
+               catch(Exception ex)
+                {
+                    Console.WriteLine($"SendMessageToAllAsync: {ex.Message}, {ex.ToString()}");
+                }
             }
         }
 

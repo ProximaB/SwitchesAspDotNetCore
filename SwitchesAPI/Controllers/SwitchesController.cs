@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SwitchesAPI.DB.DbModels;
 using SwitchesAPI.Filters;
+using SwitchesAPI.Handlers.WebSocketsHandlers;
 using SwitchesAPI.Interfaces;
 using SwitchesAPI.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http.Cors;
 
 namespace SwitchesAPI.Controllers
@@ -13,11 +15,13 @@ namespace SwitchesAPI.Controllers
     {
         private readonly ISwitchesService _switchesService;
         private readonly IRoomsService _roomsService;
+        private readonly NotificationsMessageHandler _notificationsMessageHandler;
 
-        public SwitchesController(ISwitchesService switchesService, IRoomsService roomsServices)
+        public SwitchesController(ISwitchesService switchesService, IRoomsService roomsServices, NotificationsMessageHandler notificationsMessageHandler)
         {
             _switchesService = switchesService;
             _roomsService = roomsServices;
+            _notificationsMessageHandler = notificationsMessageHandler;
         }
 
         /// <summary>
@@ -99,13 +103,14 @@ namespace SwitchesAPI.Controllers
         /// <param name="state">state of Switch [ON/OFF]</param>
         /// <returns></returns>
         [HttpPut("{switchId}/{state}")]
-        public IActionResult Put(int switchId, string state)
+        public async Task<IActionResult> PutAsync(int switchId, string state)
         {
             var _switch = _switchesService.GetById(switchId);
 
             if (_switch.State == state)
             {
-                return NoContent();
+                return Get(switchId);
+               // return NoContent();
             }
 
             _switch.State = state;
@@ -121,6 +126,8 @@ namespace SwitchesAPI.Controllers
 
             //var sw = _switchesService.GetById(switchId);
             //return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
+            var message = $"{switchId}:{state}";
+            await _notificationsMessageHandler.SendMessageToAllAsync(message);
             return Get(switchId);
         }
 

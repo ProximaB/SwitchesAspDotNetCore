@@ -50,17 +50,16 @@ namespace SwitchesAPI.Middleware
             });
 
             //TODO - investigate the Kestrel exception thrown when this is the last middleware
-            await _next.Invoke(context);
+          //await _next.Invoke(context);
         }
 
         private async Task Receive(WebSocket socket, Action<WebSocketReceiveResult, byte[]> handleMessage)
         {
             var buffer = new byte[1024 * 4];
-
+            //CancellationTokenSource source = new CancellationTokenSource(500);
             while (socket.State == WebSocketState.Open)
             {
-                var result = await socket.ReceiveAsync(buffer: new ArraySegment<byte>(buffer),
-                                                       cancellationToken: CancellationToken.None);
+                var result = await socket.ReceiveAsync(buffer: new ArraySegment<byte>(buffer), cancellationToken: CancellationToken.None); //cancellationToken: source.Token);
 
                 handleMessage(result, buffer);
             }

@@ -34,11 +34,11 @@ namespace SwitchesAPI
                 opt => opt.CreateMissingTypeMaps = true,
                 Assembly.GetEntryAssembly());
 
+            
+
             services.AddScoped<ISwitchesService, SwitchesService>();
             services.AddScoped<IRoomsService, RoomsService>();
             services.AddScoped<SwitchesContext>();
-
-            services.AddWebSocketManager();
 
             services.AddSwaggerGen(c =>
             {
@@ -48,6 +48,7 @@ namespace SwitchesAPI
                 var xmlPath = Path.Combine(basePath, "SwitchesAPI.xml");
                 c.IncludeXmlComments(xmlPath);
             });
+            services.AddWebSocketManager();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,19 +72,13 @@ namespace SwitchesAPI
             app.UseStaticFiles();
             //
 
-            var wsOptions = new WebSocketOptions()
-            {
-                KeepAliveInterval = TimeSpan.FromSeconds(120),
-                ReceiveBufferSize = 4 * 1024
-            };
+            app.UseMvc();
 
-            //app.UseWebSockets(wsOptions);
             app.UseWebSockets();
 
-            app.MapWebSocketManager("/ws", serv.GetService<ChatMessageHandler>());
-//            app.MapWebSocketManager("/test", serv.GetService<ChatMessageHandler>());
-
-            app.UseMvc();
+            //app.MapWebSocketManager("/ws", serv.GetService<ChatMessageHandler>());
+            //            app.MapWebSocketManager("/test", serv.GetService<ChatMessageHandler>());
+            app.MapWebSocketManager("/notifications", serv.GetService<NotificationsMessageHandler>());    
 
             app.UseSwagger();
 

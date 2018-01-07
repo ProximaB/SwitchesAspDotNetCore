@@ -59,7 +59,22 @@ namespace SwitchesAPI
                     .AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
             );
 
-            app.UseWebSockets();
+            //for Client presentation
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            DefaultFilesOptions options = new DefaultFilesOptions();
+            options.DefaultFileNames.Clear();
+            options.DefaultFileNames.Add("SwitchAPIClient.html");
+            app.UseDefaultFiles(options);
+            app.UseStaticFiles();
+            //
+
+            var wsOptions = new WebSocketOptions()
+            {
+                KeepAliveInterval = TimeSpan.FromSeconds(120),
+                ReceiveBufferSize = 4 * 1024
+            };
+            app.UseWebSockets(wsOptions);
             app.UseWebSocketHandler();
 
             app.UseMvc();
@@ -71,6 +86,8 @@ namespace SwitchesAPI
                 var swaggerPath = "/swagger/v1/swagger.json";
                 c.SwaggerEndpoint(swaggerPath, "Switches API V1");
             });
+
+ 
         }
     }
 }

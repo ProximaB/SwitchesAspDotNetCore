@@ -25,8 +25,8 @@ namespace SwitchesAPI.Middlewares
             _logger.LogInformation("Handling request: " + httpContext.Request.Path);
             if (httpContext.Request.Path == "/ws")
             {
-                if (httpContext.WebSockets.IsWebSocketRequest)
-                {
+                //if (httpContext.WebSockets.IsWebSocketRequest)
+                //{
                     var webSocket = await httpContext.WebSockets.AcceptWebSocketAsync();
                     while (webSocket.State == WebSocketState.Open)
                     {
@@ -47,7 +47,11 @@ namespace SwitchesAPI.Middlewares
                                 break;
                         }
                     }
-                }
+                //}
+                //else
+                //{
+                //    httpContext.Response.StatusCode = 400;
+                //}
             }
             else
             {

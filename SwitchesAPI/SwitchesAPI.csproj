@@ -20,7 +20,10 @@
 
   <ItemGroup>
     <Folder Include="WebSocketsHandlers\" />
-    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\SwitchAPIClient.html" />
   </ItemGroup>
 
   <ItemGroup>

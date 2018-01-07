@@ -19,10 +19,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="WebSocketsHandlers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\SwitchAPIClient.html" />
   </ItemGroup>
 

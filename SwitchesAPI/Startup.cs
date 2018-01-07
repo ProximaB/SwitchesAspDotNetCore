@@ -14,7 +14,9 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using SwitchesAPI.DB;
 using System.Web.Http.Cors;
-using SwitchesAPI.Middlewares;
+using SwitchesAPI.Middleware;
+using SwitchesAPI.Extensions.WebSocketManager;
+using SwitchesAPI.Handlers.WebSocketsHandlers;
 
 namespace SwitchesAPI
 {
@@ -34,7 +36,9 @@ namespace SwitchesAPI
 
             services.AddScoped<ISwitchesService, SwitchesService>();
             services.AddScoped<IRoomsService, RoomsService>();
-            services.AddScoped<SwitchesContext>();           
+            services.AddScoped<SwitchesContext>();
+
+            services.AddWebSocketManager();
 
             services.AddSwaggerGen(c =>
             {
@@ -47,7 +51,7 @@ namespace SwitchesAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serv)
         {
             if (env.IsDevelopment())
             {
@@ -59,9 +63,7 @@ namespace SwitchesAPI
                     .AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
             );
 
-            //for Client presentation
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
+            //for Client presentation only
             DefaultFilesOptions options = new DefaultFilesOptions();
             options.DefaultFileNames.Clear();
             options.DefaultFileNames.Add("SwitchAPIClient.html");
@@ -74,8 +76,12 @@ namespace SwitchesAPI
                 KeepAliveInterval = TimeSpan.FromSeconds(120),
                 ReceiveBufferSize = 4 * 1024
             };
-            app.UseWebSockets(wsOptions);
-            app.UseWebSocketHandler();
+
+            //app.UseWebSockets(wsOptions);
+            app.UseWebSockets();
+
+            app.MapWebSocketManager("/ws", serv.GetService<ChatMessageHandler>());
+//            app.MapWebSocketManager("/test", serv.GetService<ChatMessageHandler>());
 
             app.UseMvc();
 

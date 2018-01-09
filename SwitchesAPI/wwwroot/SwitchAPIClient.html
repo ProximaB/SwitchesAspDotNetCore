@@ -232,8 +232,8 @@
         function SwitchesViewModel() {
             var self = this;
 
-            self.roomsURI = 'http://192.168.0.106:57493/api/Rooms/';
-            self.switchesURI = 'http://192.168.0.106:57493/api/Switches/';
+            self.roomsURI = 'http://192.168.137.1:57493/api/Rooms/';
+            self.switchesURI = 'http://192.168.137.1:57493/api/Switches/';
             self.switches = ko.observableArray();
             self.rooms = ko.observableArray();
 
@@ -386,7 +386,7 @@
             self.roomId = ko.observable();
             self.state = ko.observable();
 
-            self.roomsURI = 'http://192.168.0.106:57493/api/Rooms/';
+            self.roomsURI = 'http://192.168.137.1:57493/api/Rooms/';
 
             self.ajax = function (uri, method, data) {
                 var request = {
@@ -440,7 +440,7 @@
             self.roomId = ko.observable();
             self.state = ko.observable();
 
-            self.roomsURI = 'http://192.168.0.106:57493/api/Rooms/';
+            self.roomsURI = 'http://192.168.137.1:57493/api/Rooms/';
 
             self.ajax = function (uri, method, data) {
                 var request = {

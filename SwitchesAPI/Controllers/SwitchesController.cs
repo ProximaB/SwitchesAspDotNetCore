@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SwitchesAPI.DB.DbModels;
 using SwitchesAPI.Filters;
 using SwitchesAPI.Handlers.WebSocketsHandlers;

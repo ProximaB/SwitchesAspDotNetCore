@@ -41,7 +41,15 @@ namespace SwitchesAPI.Handlers.WebSocketsHandlers
 
         public async Task SendMessageAsync(string socketId, string message)
         {
-            await SendMessageAsync(WebSocketConnectionManager.GetSocketById(socketId), message);
+            try
+            {
+                await SendMessageAsync(WebSocketConnectionManager.GetSocketById(socketId), message);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"SendMessageToAllAsync: {ex.Message}, {ex.ToString()}");
+            }
+           
         }
 
         public async Task SendMessageToAllAsync(string message)

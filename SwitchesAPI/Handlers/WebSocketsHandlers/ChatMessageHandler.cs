@@ -8,6 +8,7 @@ namespace SwitchesAPI.Handlers.WebSocketsHandlers
 {
     public class ChatMessageHandler : WebSocketHandler
     {
+        SwitchesAPI.DB.SwitchesContext _context;
         public ChatMessageHandler(WebSocketConnectionManager webSocketConnectionManager) : base(webSocketConnectionManager)
         {
         }
@@ -23,8 +24,16 @@ namespace SwitchesAPI.Handlers.WebSocketsHandlers
         public override async Task ReceiveAsync(WebSocket socket, WebSocketReceiveResult result, byte[] buffer)
         {
             var socketId = WebSocketConnectionManager.GetId(socket);
-            var message = $"{socketId} said: {Encoding.UTF8.GetString(buffer, 0, result.Count)}";
-
+            var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
+            var msg = message.Split(':');
+            var id = msg[0];
+            var state = msg[1];
+            if(state == "ON" || state == "OFF")
+            {
+                _context.Switches.Find(id).State = state;
+                _context.SaveChanges();
+            }
+           
             await SendMessageToAllAsync(message);
         }
     }

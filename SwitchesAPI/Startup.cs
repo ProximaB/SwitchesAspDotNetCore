@@ -17,6 +17,7 @@ using System.Web.Http.Cors;
 using SwitchesAPI.Middleware;
 using SwitchesAPI.Extensions.WebSocketManager;
 using SwitchesAPI.Handlers.WebSocketsHandlers;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace SwitchesAPI
 {
@@ -26,6 +27,8 @@ namespace SwitchesAPI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //potrzebny przy SSE, aktualnie nie dodawany domyślnie
+
             services.AddMvc();
 
             services.AddCors();
@@ -33,8 +36,6 @@ namespace SwitchesAPI
             services.AddAutoMapper(
                 opt => opt.CreateMissingTypeMaps = true,
                 Assembly.GetEntryAssembly());
-
-            
 
             services.AddScoped<ISwitchesService, SwitchesService>();
             services.AddScoped<IRoomsService, RoomsService>();
@@ -60,9 +61,10 @@ namespace SwitchesAPI
             }
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost")
+                builder.WithOrigins("http://192.168.137.1")
                     .AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
             );
+
 
             //for Client presentation only
             DefaultFilesOptions options = new DefaultFilesOptions();
@@ -73,6 +75,28 @@ namespace SwitchesAPI
             //
 
             app.UseMvc();
+
+
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path.ToString().Equals("/sse"))
+                {
+                    var response = context.Response;
+                    response.Headers.Add("Content-Type", "text/event-stream");
+
+                    for (var i = 0; true; ++i)
+                    {
+                        // WriteAsync requires `using Microsoft.AspNetCore.Http`
+                        await response
+                            .WriteAsync($"data: Middleware {i} at {DateTime.Now}\r\r");
+
+                        response.Body.Flush();
+                        await Task.Delay(5 * 1000);
+                    }
+                }
+
+                await next.Invoke();
+            });
 
             app.UseWebSockets();
 

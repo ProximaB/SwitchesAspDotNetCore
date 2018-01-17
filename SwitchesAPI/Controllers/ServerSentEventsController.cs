@@ -5,9 +5,12 @@ using SwitchesAPI.Filters;
 using SwitchesAPI.Handlers.WebSocketsHandlers;
 using SwitchesAPI.Interfaces;
 using SwitchesAPI.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Web.Http.Cors;
+
 
 namespace SwitchesAPI.Controllers
 {
@@ -25,10 +28,16 @@ namespace SwitchesAPI.Controllers
             _notificationsMessageHandler = notificationsMessageHandler;
         }
 
-        /// <summary>
-        /// Get all Switeches
-        /// </summary>
-        /// <returns>List of Switches</returns>
+        private async Task chatter_PropertyChangedAsync(object sender, PropertyChangedEventArgs e)
+        {
+            var response = _httpContextAccessor.HttpContext.Response;
+
+            await response
+                   .WriteAsync("data: A property has changed: {e.PropertyName} \r\r");
+
+            response.Body.Flush();
+        }
+
         [HttpGet]
         public async Task Get()
         {
@@ -37,11 +46,12 @@ namespace SwitchesAPI.Controllers
 
             for (var i = 0; true; ++i)
             {
+
                 await response
                     .WriteAsync($"data: Controller {i} at {System.DateTime.Now}\r\r");
 
                 response.Body.Flush();
-                await Task.Delay(5 * 1000);
+                await Task.Delay(1000);
             }
            // var _switches = AutoMapper.Mapper.Map<List<SwitchResponse>>(_switchesService.GetAll());
             //return Ok(_switches);

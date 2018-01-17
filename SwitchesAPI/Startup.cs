@@ -61,7 +61,7 @@ namespace SwitchesAPI
             }
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://192.168.137.1")
+                builder.WithOrigins("http://192.168.1.9")
                     .AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
             );
 
@@ -102,7 +102,7 @@ namespace SwitchesAPI
 
             //app.MapWebSocketManager("/ws", serv.GetService<ChatMessageHandler>());
             //            app.MapWebSocketManager("/test", serv.GetService<ChatMessageHandler>());
-            app.MapWebSocketManager("/notifications", serv.GetService<NotificationsMessageHandler>());    
+            app.MapWebSocketManager("/notifications", serv.GetService<NotificationsMessageHandler>());
 
             app.UseSwagger();
 

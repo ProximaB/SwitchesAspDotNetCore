@@ -5,18 +5,28 @@ using SwitchesAPI.Filters;
 using SwitchesAPI.Handlers.WebSocketsHandlers;
 using SwitchesAPI.Interfaces;
 using SwitchesAPI.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Web.Http.Cors;
 
 namespace SwitchesAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class SwitchesController : Controller
+    public class SwitchesController : Controller, INotifyPropertyChanged
     {
         private readonly ISwitchesService _switchesService;
         private readonly IRoomsService _roomsService;
         private readonly NotificationsMessageHandler _notificationsMessageHandler;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public SwitchesController(ISwitchesService switchesService, IRoomsService roomsServices, NotificationsMessageHandler notificationsMessageHandler)
         {

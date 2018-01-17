@@ -16,4 +16,6 @@ Update-Database –TargetMigration:201712191711094_Reset
 Update-Database -StartUpProjectName SwitchesAPI.DB –TargetMigration:201712191711094_Reset
 
 
+EntityFramework\Update-Database -StartUpProjectName SwitchesAPI.DB
+
 

@@ -5,8 +5,6 @@
 :heavy_check_mark:   Control your switches any device with a web browser  
 :heavy_check_mark:   Create users with specyfic list of swithes or rooms that they are able to control.
 
-:gem: If you're interested in this project feel free to contribute to development. I'm waiting for you pull request! :blush:  
-
 #### TO DO
 - [X] Dodanie obsługi webSockets przez klienta, który aktualizuje widok.
 - [X] Dodanie ekranu logowania.
@@ -28,3 +26,6 @@
       - Jeżeli nie -> dodaj switcha POST switch [WS:aktualizacja widoku po stronie clienta]
       - Jeżeli tak -> idź do 1.  
 - [ ] Gdyby był jeszcze czas można pomyśleć o UDP broadcasting, Esp  nasłuchiwało by i pobierało odpowiedni adres do WebApi, żeby nie musiał być zahardcodowany.
+
+:gem: If you're interested in this project feel free to contribute to development. I'm waiting for you pull request! :blush:  
+

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace SwitchesAPI.Controllers
 {
+
     [Route("api/[controller]")]
     public class RoomsController : Controller
     {

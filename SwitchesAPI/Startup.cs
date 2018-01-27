@@ -74,6 +74,7 @@ namespace SwitchesAPI
             app.UseStaticFiles();
             //
 
+           // app.UseMiddleware<AuthenticationMiddleware>();
             app.UseMvc();
 
 

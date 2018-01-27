@@ -1,6 +1,8 @@
 ﻿using SwitchesAPI.DB.DbModels;
 using System.Data.Entity;
 
+using System.Runtime.Remoting;
+
 namespace SwitchesAPI.DB
 {
     public class SwitchesContext : DbContext

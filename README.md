@@ -1,6 +1,6 @@
 # Switches
 
-**Power switches! Smart Lighting Control Systems and more!**
+**Smart Lighting Control Systems and more!**
 
 :heavy_check_mark:   Control your switches any device with a web browser  
 :heavy_check_mark:   Create users with specyfic list of swithes or rooms that they are able to control.

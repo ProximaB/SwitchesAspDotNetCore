@@ -2,7 +2,7 @@
 
 **Power switches! Smart Lighting Control Systems and more!**
 
-:heavy_check_mark:   Control your switches with every dievice with internet browser.  
+:heavy_check_mark:   Control your switches any device with a web browser
 :heavy_check_mark:   Create users with specyfic list of swithes or rooms that they are able to control.
 
 :gem: If you're intersted in this project feel free to contribute to development. I'm waiting for you pull request! :blush:  

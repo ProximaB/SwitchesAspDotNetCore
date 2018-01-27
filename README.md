@@ -6,7 +6,8 @@
 :heavy_check_mark:   Create users with specyfic list of swithes or rooms that they are able to control.
 
 :gem: If you're intersted in this project feel free to contribute to development. I'm waiting for you pull request! :blush:  
-###TO DO
+
+#### TO DO
 - [X] Dodanie obsługi webSockets przez klienta, który aktualizuje widok.
 - [X] Dodanie ekranu logowania.
 - [ ] Basic Auth WebApi + Tabela użytkowników. Response dopasowany do użytkownika. *(niekoniecznie basic auth, tylko moze zaimplementowac cos w mvc ctrl.)*

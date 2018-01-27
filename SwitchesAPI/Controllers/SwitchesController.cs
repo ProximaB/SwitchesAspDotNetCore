@@ -1,53 +1,52 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SwitchesAPI.DB.DbModels;
 using SwitchesAPI.Filters;
 using SwitchesAPI.Handlers.WebSocketsHandlers;
 using SwitchesAPI.Interfaces;
 using SwitchesAPI.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using System.Web.Http.Cors;
 
 namespace SwitchesAPI.Controllers
 {
     [Route("api/[controller]")]
     public class SwitchesController : Controller, INotifyPropertyChanged
     {
-        private readonly ISwitchesService _switchesService;
-        private readonly IRoomsService _roomsService;
         private readonly NotificationsMessageHandler _notificationsMessageHandler;
+        private readonly IRoomsService _roomsService;
+        private readonly ISwitchesService _switchesService;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public SwitchesController(ISwitchesService switchesService, IRoomsService roomsServices, NotificationsMessageHandler notificationsMessageHandler)
+        public SwitchesController(ISwitchesService switchesService, IRoomsService roomsServices,
+            NotificationsMessageHandler notificationsMessageHandler)
         {
             _switchesService = switchesService;
             _roomsService = roomsServices;
             _notificationsMessageHandler = notificationsMessageHandler;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         /// <summary>
-        /// Get all Switeches
+        ///     Get all Switeches
         /// </summary>
         /// <returns>List of Switches</returns>
         [HttpGet]
         public IActionResult GetAllSwitches()
         {
-            var _switches = AutoMapper.Mapper.Map<List<SwitchResponse>>(_switchesService.GetAll());
+            var _switches = Mapper.Map<List<SwitchResponse>>(_switchesService.GetAll());
             return Ok(_switches);
         }
 
         /// <summary>
-        /// Get switch by id
+        ///     Get switch by id
         /// </summary>
         /// <param name="switchId">movie identifier</param>
         /// <returns>Switch if found</returns>
@@ -62,38 +61,37 @@ namespace SwitchesAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(AutoMapper.Mapper.Map<SwitchResponse>(_switch));
+            return Ok(Mapper.Map<SwitchResponse>(_switch));
         }
 
         /// <summary>
-        /// Add new switch to repositorium
+        ///     Add new switch to repositorium
         /// </summary>
         /// <param name="_switch">new switch</param>
         /// <returns></returns>
         [HttpPost]
         [ModelValidation]
-        public IActionResult Post([FromBody]SwitchRequest _switch)
+        public IActionResult Post([FromBody] SwitchRequest _switch)
         {
-            if (!_switchesService.AddNewSwitch(AutoMapper.Mapper.Map<Switch>(_switch), out string uniqueStr))
+            if (!_switchesService.AddNewSwitch(Mapper.Map<Switch>(_switch), out string uniqueStr))
             {
                 return BadRequest();
             }
 
-            var sw =_switchesService.GetByUniqueStr(uniqueStr);
-            return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
-
+            var sw = _switchesService.GetByUniqueStr(uniqueStr);
+            return Ok(Mapper.Map<SwitchResponse>(sw));
         }
 
         /// <summary>
-        /// Update switch in repositorium
+        ///     Update switch in repositorium
         /// </summary>
         /// <param name="switchId">Updated switch Id</param>
         /// <param name="switchRequest">obj Switch</param>
         /// <returns></returns>
         [HttpPut("{switchId}")]
-        public IActionResult Put(int switchId, [FromBody]SwitchRequest switchRequest)
+        public IActionResult Put(int switchId, [FromBody] SwitchRequest switchRequest)
         {
-            var _switch = AutoMapper.Mapper.Map<Switch>(switchRequest);
+            Switch _switch = Mapper.Map<Switch>(switchRequest);
             _switch.Id = switchId;
 
             if (!_switchesService.UpdateSwitch(_switch))
@@ -104,11 +102,10 @@ namespace SwitchesAPI.Controllers
             // var sw = _switchesService.GetById(switchId);
             // return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
             return Get(switchId);
-
         }
 
         /// <summary>
-        /// Update state of switch by Id.
+        ///     Update state of switch by Id.
         /// </summary>
         /// <param name="switchId">Updated switch Id</param>
         /// <param name="state">state of Switch [ON/OFF]</param>
@@ -121,7 +118,7 @@ namespace SwitchesAPI.Controllers
             if (_switch.State == state)
             {
                 return Get(switchId);
-               // return NoContent();
+                // return NoContent();
             }
 
             _switch.State = state;
@@ -143,7 +140,7 @@ namespace SwitchesAPI.Controllers
         }
 
         /// <summary>
-        /// Delete switch from repositorium
+        ///     Delete switch from repositorium
         /// </summary>
         /// <param name="switchId">switch identifier</param>
         /// <returns></returns>

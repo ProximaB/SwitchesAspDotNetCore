@@ -7,6 +7,7 @@ using SwitchesAPI.Interfaces;
 using SwitchesAPI.Common;
 using SwitchesAPI.DB;
 using System.Text;
+using Microsoft.AspNetCore.DataProtection;
 using SwitchesAPI.Extensions;
 
 namespace SwitchesAPI.Services
@@ -25,7 +26,7 @@ namespace SwitchesAPI.Services
             return this.context.Rooms.ToList();
         }
 
-        public Room GetById(int roomId)
+        public Room GetById(int? roomId)
         {
             //return context.Rooms.Find(id);
             return context.Rooms.Where(x => x.Id == roomId).FirstOrDefault();
@@ -42,24 +43,23 @@ namespace SwitchesAPI.Services
             return room.Switches.ToList();
         }
 
-        public bool AddNewRoom(Room room, out string uniqueStr)
+        public bool AddNewRoom(Room room, out int? id)
         {
-
-            uniqueStr = string.Empty.IdBuilder(11);
+            id = null;
 
             if (room == null) return false;
 
+            room.UniqueStr = String.Empty.IdBuilder(11);
             room.LastModiDateTime = DateTime.Now;
-            room.UniqueStr = uniqueStr;
-            context.Rooms.Add(room);
-        
+ 
             try
             {
+                context.Rooms.Add(room);
                 context.SaveChanges();
+                id = room.Id;
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException e)
             {
-
                 return false;
             }
             return true;
@@ -84,7 +84,6 @@ namespace SwitchesAPI.Services
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException e)
             {
-
                 return false;
             }
             return true;
@@ -100,6 +99,7 @@ namespace SwitchesAPI.Services
 
             try
             {
+                context.Rooms.Remove(room);
                 context.SaveChanges();
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException e)

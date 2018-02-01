@@ -11,11 +11,11 @@ namespace SwitchesAPI.Controllers
     [Route("api/[controller]")]
     public class RoomsController : Controller
     {
-        private readonly IRoomsService _roomsService;
+        private readonly IRoomsService roomsService;
 
         public RoomsController(IRoomsService reviewsService)
         {
-            _roomsService = reviewsService;
+            roomsService = reviewsService;
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace SwitchesAPI.Controllers
         [HttpGet]
         public IActionResult GetAllRooms()
         {
-            var rooms = AutoMapper.Mapper.Map<List<RoomResponse>>(_roomsService.GetAll());
+            var rooms = AutoMapper.Mapper.Map<List<RoomResponse>>(roomsService.GetAll());
             return Ok(rooms);
         }
 
@@ -37,7 +37,7 @@ namespace SwitchesAPI.Controllers
         [HttpGet("{roomId}")]
         public IActionResult Get(int roomId)
         {
-            Room room = _roomsService.GetById(roomId);
+            Room room = roomsService.GetById(roomId);
 
             if (room == null)
             {
@@ -56,7 +56,7 @@ namespace SwitchesAPI.Controllers
         [ExecutionTime]
         public IActionResult GetSwitches(int roomId)
         {
-            var switches = _roomsService.GetSwitchesByRoomId(roomId);
+            var switches = roomsService.GetSwitchesByRoomId(roomId);
             if (switches == null)
             {
                 return NotFound();
@@ -73,12 +73,11 @@ namespace SwitchesAPI.Controllers
         [SwitchApiExceptionFilter]
         public IActionResult Post([FromBody]RoomRequest room)
         {
-            if (!_roomsService.AddNewRoom(AutoMapper.Mapper.Map<Room>(room), out string uniqueStr))
+            if (roomsService.AddNewRoom(AutoMapper.Mapper.Map<Room>(room), out int? id))
             {
                 return BadRequest();
             }
-
-            Room _room = _roomsService.GetByUniqueStr(uniqueStr);         
+            Room _room = roomsService.GetById(id);        
             return Ok(AutoMapper.Mapper.Map<RoomResponse>(_room));
         }
 
@@ -90,18 +89,18 @@ namespace SwitchesAPI.Controllers
         [HttpPut("{roomId}")]
         public IActionResult Put(int roomId, [FromBody] RoomRequest room)
         {
-            if (!_roomsService.UpdateRoom(roomId, AutoMapper.Mapper.Map<Room>(room)))
+            if (!roomsService.UpdateRoom(roomId, AutoMapper.Mapper.Map<Room>(room)))
             {
                 return BadRequest();
             }
 
-            //Room _room = _roomsService.GetById(roomId);
+            //Room _room = roomsService.GetById(roomId);
             // return Ok(AutoMapper.Mapper.Map<List<RoomResponse>>(_room));   
             return Get(roomId);
         }
         //public IActionResult Put([FromBody]RoomRequestPut room)
         //{
-        //    if (_roomsService.UpdateRoom(AutoMapper.Mapper.Map<Room>(room)))
+        //    if (roomsService.UpdateRoom(AutoMapper.Mapper.Map<Room>(room)))
         //    {
         //        return Ok();
         //    }
@@ -117,7 +116,7 @@ namespace SwitchesAPI.Controllers
         [HttpDelete("{roomId}")]
         public IActionResult Delete(int roomId)
         {
-            if (!_roomsService.Delete(roomId))
+            if (!roomsService.Delete(roomId))
             {
                 return BadRequest();
             }

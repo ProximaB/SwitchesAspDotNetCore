@@ -10,8 +10,8 @@ namespace SwitchesAPI.DB.DbModels
         [Key, Column("Id")]
         public int Id { get; set; }
 
-        [Index(IsUnique = true), Column("UniqueString"), MaxLength(11)]
-        public string UniqueStr { get; set; }
+        //[Index(IsUnique = true), Column("UniqueString"), MaxLength(11)]
+        //public string UniqueStr { get; set; }
 
         [Required]
         public string Name { get; set; }

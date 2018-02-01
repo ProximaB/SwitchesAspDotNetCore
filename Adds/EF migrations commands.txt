@@ -1,6 +1,6 @@
-Enable-Migrations -StartUpProjectName MoviesAPI.DB
-Add-Migration {{NAME}} -StartUpProjectName MoviesAPI.DB
-Update-Database -StartUpProjectName MoviesAPI.DB
+Enable-Migrations -StartUpProjectName SwitchesAPI.DB 
+Add-Migration {{NAME}} -StartUpProjectName SwitchesAPI.DB 
+Update-Database -StartUpProjectName SwitchesAPI.DB 
 
 Enable-Migrations -StartUpProjectName SwitchesAPI.DB 
 
@@ -10,7 +10,7 @@ Update-Database -StartUpProjectName SwitchesAPI.DB
 
 
 
-Add-Migration {Rooms_Id_string_gerated} -StartUpProjectName SwitchesAPI.DB
+Add-Migration {Initail_Migration} -StartUpProjectName SwitchesAPI.DB
 
 Update-Database –TargetMigration:201712191711094_Reset
 Update-Database -StartUpProjectName SwitchesAPI.DB –TargetMigration:201712191711094_Reset
@@ -19,3 +19,4 @@ Update-Database -StartUpProjectName SwitchesAPI.DB –TargetMigration:201712191711
 EntityFramework\Update-Database -StartUpProjectName SwitchesAPI.DB
 
 
+EntityFramework\Add-Migration {removeUniqueString} -StartUpProjectName SwitchesAPI.DB

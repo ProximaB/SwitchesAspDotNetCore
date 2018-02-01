@@ -67,7 +67,7 @@ namespace SwitchesAPI
 
 
             //for Client presentation only
-            DefaultFilesOptions options = new DefaultFilesOptions();
+            var options = new DefaultFilesOptions();
             options.DefaultFileNames.Clear();
             options.DefaultFileNames.Add("SwitchAPIClient.html");
             app.UseDefaultFiles(options);

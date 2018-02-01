@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace SwitchesAPI.Controllers
         private readonly IRoomsService _roomsService;
         private readonly ISwitchesService _switchesService;
 
-        public SwitchesController(ISwitchesService switchesService, IRoomsService roomsServices,
+        public SwitchesController (ISwitchesService switchesService, IRoomsService roomsServices,
             NotificationsMessageHandler notificationsMessageHandler)
         {
             _switchesService = switchesService;
@@ -29,7 +30,7 @@ namespace SwitchesAPI.Controllers
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        private void NotifyPropertyChanged ([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -39,7 +40,7 @@ namespace SwitchesAPI.Controllers
         /// </summary>
         /// <returns>List of Switches</returns>
         [HttpGet]
-        public IActionResult GetAllSwitches()
+        public IActionResult GetAllSwitches ()
         {
             var _switches = Mapper.Map<List<SwitchResponse>>(_switchesService.GetAll());
             return Ok(_switches);
@@ -52,11 +53,11 @@ namespace SwitchesAPI.Controllers
         /// <returns>Switch if found</returns>
         [HttpGet("{switchId}")]
         [ExecutionTime]
-        public IActionResult Get(int switchId)
+        public IActionResult Get (int switchId)
         {
             Switch _switch = _switchesService.GetById(switchId);
 
-            if (_switch == null)
+            if ( _switch == null )
             {
                 return NotFound();
             }
@@ -67,19 +68,21 @@ namespace SwitchesAPI.Controllers
         /// <summary>
         ///     Add new switch to repositorium
         /// </summary>
-        /// <param name="_switch">new switch</param>
+        /// <param name="switch">new switch</param>
         /// <returns></returns>
         [HttpPost]
         [ModelValidation]
-        public IActionResult Post([FromBody] SwitchRequest _switch)
+        public IActionResult Post ([FromBody] SwitchRequest swth)
         {
-            if (!_switchesService.AddNewSwitch(Mapper.Map<Switch>(_switch), out string uniqueStr))
+            if ( !_switchesService.AddNewSwitch(Mapper.Map<Switch>(swth)) )
             {
                 return BadRequest();
             }
 
-            var sw = _switchesService.GetByUniqueStr(uniqueStr);
-            return Ok(Mapper.Map<SwitchResponse>(sw));
+            int switchId = _switchesService.LastUpdatedId ?? throw new NullReferenceException();
+            var _swth = _switchesService.GetById(switchId);
+
+            return Ok(Mapper.Map<SwitchResponse>(_swth));
         }
 
         /// <summary>
@@ -89,12 +92,12 @@ namespace SwitchesAPI.Controllers
         /// <param name="switchRequest">obj Switch</param>
         /// <returns></returns>
         [HttpPut("{switchId}")]
-        public IActionResult Put(int switchId, [FromBody] SwitchRequest switchRequest)
+        public IActionResult Put (int switchId, [FromBody] SwitchRequest switchRequest)
         {
-            Switch _switch = Mapper.Map<Switch>(switchRequest);
-            _switch.Id = switchId;
+            Switch swth = Mapper.Map<Switch>(switchRequest);
+            swth.Id = switchId;
 
-            if (!_switchesService.UpdateSwitch(_switch))
+            if ( !_switchesService.UpdateSwitch(swth) )
             {
                 return BadRequest();
             }
@@ -111,18 +114,18 @@ namespace SwitchesAPI.Controllers
         /// <param name="state">state of Switch [ON/OFF]</param>
         /// <returns></returns>
         [HttpPut("{switchId}/{state}")]
-        public async Task<IActionResult> PutAsync(int switchId, string state)
+        public async Task<IActionResult> PutAsync (int switchId, string state)
         {
-            var _switch = _switchesService.GetById(switchId);
+            var _swth = _switchesService.GetById(switchId);
 
-            if (_switch.State == state)
+            if ( _swth.State == state )
             {
                 return Get(switchId);
                 // return NoContent();
             }
 
-            _switch.State = state;
-            if (!_switchesService.UpdateSwitch(_switch))
+            _swth.State = state;
+            if ( !_switchesService.UpdateSwitch(_swth) )
             {
                 return BadRequest();
             }
@@ -145,9 +148,9 @@ namespace SwitchesAPI.Controllers
         /// <param name="switchId">switch identifier</param>
         /// <returns></returns>
         [HttpDelete("{switchId}")]
-        public IActionResult Delete(int switchId)
+        public IActionResult Delete (int switchId)
         {
-            if (!_switchesService.Delete(switchId))
+            if ( !_switchesService.Delete(switchId) )
             {
                 return BadRequest();
             }

@@ -1,40 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
-using SwitchesAPI.DB.DbModels;
-using SwitchesAPI.Interfaces;
-using SwitchesAPI.Common;
 using SwitchesAPI.DB;
-using System.Text;
+using SwitchesAPI.DB.DbModels;
 using SwitchesAPI.Extensions;
+using SwitchesAPI.Interfaces;
 
 namespace SwitchesAPI.Services
 {
     public class RoomsService : IRoomsService
-    {        
+    {
         private readonly SwitchesContext context;
 
-        public RoomsService(SwitchesContext context)
-        {   
+        public int? LastUpdatedId { get; set; }
+
+        public RoomsService (SwitchesContext context)
+        {
             this.context = context;
         }
 
-        public List<Room> GetAll()
+        public List<Room> GetAll ()
         {
-            return this.context.Rooms.ToList();
+            return context.Rooms.ToList();
         }
 
-        public Room GetById(int roomId)
+        public Room GetById (int roomId)
         {
             //return context.Rooms.Find(id);
             return context.Rooms.Where(x => x.Id == roomId).FirstOrDefault();
         }
 
-        public List<Switch> GetSwitchesByRoomId(int roomId)
+        public List<Switch> GetSwitchesByRoomId (int roomId)
         {
             var room = context.Rooms.Where(r => r.Id == roomId).SingleOrDefault();
-            if(room == null)
+            if ( room == null )
             {
                 return null;
             }
@@ -42,34 +42,34 @@ namespace SwitchesAPI.Services
             return room.Switches.ToList();
         }
 
-        public bool AddNewRoom(Room room, out string uniqueStr)
+        public bool AddNewRoom (Room room)
         {
-
-            uniqueStr = string.Empty.IdBuilder(11);
-
-            if (room == null) return false;
-
-            room.LastModiDateTime = DateTime.Now;
-            room.UniqueStr = uniqueStr;
-            context.Rooms.Add(room);
-        
-            try
+            if ( room == null )
             {
-                context.SaveChanges();
-            }
-            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
-            {
-
                 return false;
             }
+
+            room.LastModiDateTime = DateTime.Now;
+
+            try
+            {
+                context.Rooms.Add(room);
+                context.SaveChanges();
+                LastUpdatedId = room.Id;
+            }
+            catch ( DbUpdateException )
+            {
+                return false;
+            }
+
             return true;
         }
 
-        public bool UpdateRoom(int roomId, Room room)
+        public bool UpdateRoom (int roomId, Room room)
         {
             Room foundRoom = GetById(roomId);
 
-            if (foundRoom == null)
+            if ( foundRoom == null )
             {
                 return false;
             }
@@ -81,19 +81,21 @@ namespace SwitchesAPI.Services
             try
             {
                 context.SaveChanges();
+                LastUpdatedId = room.Id;
             }
-            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            catch ( DbUpdateException )
             {
-
                 return false;
             }
             return true;
         }
 
-        public bool Delete(int roomId)
+
+
+        public bool Delete (int roomId)
         {
             Room room = GetById(roomId);
-            if (room == null)
+            if ( room == null )
             {
                 return false;
             }
@@ -102,17 +104,12 @@ namespace SwitchesAPI.Services
             {
                 context.SaveChanges();
             }
-            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            catch ( DbUpdateException )
             {
                 return false;
             }
 
             return true;
-        }
-
-        public Room GetByUniqueStr(string uniqueStr)
-        {
-            return context.Rooms.Where(s => s.UniqueStr == uniqueStr).FirstOrDefault();
         }
     }
 }

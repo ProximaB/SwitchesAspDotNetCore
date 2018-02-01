@@ -9,11 +9,12 @@ namespace SwitchesAPI.Interfaces
 
         Switch GetById(int switchId);
 
-        bool AddNewSwitch(Switch _switch, out string uniqueStr);
+        bool AddNewSwitch(Switch swth);
 
-        bool UpdateSwitch(Switch _switch);
+        bool UpdateSwitch(Switch swth);
 
         bool Delete(int switchId);
-        Switch GetByUniqueStr(string uniqueStr);
+
+        int? LastUpdatedId { get; set; }
     }
 }

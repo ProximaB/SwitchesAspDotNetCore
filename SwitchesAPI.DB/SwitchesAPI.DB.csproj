@@ -63,6 +63,10 @@
     <Compile Include="Migrations\201801022202480_Initial_Migrations.Designer.cs">
       <DependentUpon>201801022202480_Initial_Migrations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802011551242_removeUniqueString.cs" />
+    <Compile Include="Migrations\201802011551242_removeUniqueString.Designer.cs">
+      <DependentUpon>201802011551242_removeUniqueString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SwitchesContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +78,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801022202480_Initial_Migrations.resx">
       <DependentUpon>201801022202480_Initial_Migrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802011551242_removeUniqueString.resx">
+      <DependentUpon>201802011551242_removeUniqueString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -28,7 +28,7 @@ namespace SwitchesAPI.Controllers
             _notificationsMessageHandler = notificationsMessageHandler;
         }
 
-        private async Task chatter_PropertyChangedAsync(object sender, PropertyChangedEventArgs e)
+        private async Task Chatter_PropertyChangedAsync(object sender, PropertyChangedEventArgs e)
         {
             var response = _httpContextAccessor.HttpContext.Response;
 

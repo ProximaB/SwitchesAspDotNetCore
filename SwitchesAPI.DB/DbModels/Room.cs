@@ -8,7 +8,7 @@ namespace SwitchesAPI.DB.DbModels
     public class Room
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key, Required, Column("Id")]
+        [Key, Column("RoomId")]
         public int Id { get; set; }
 
         //[Index(IsUnique = true), Column("UniqueString"), MaxLength(11)]

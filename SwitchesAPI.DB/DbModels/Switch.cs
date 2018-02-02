@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,11 +8,8 @@ namespace SwitchesAPI.DB.DbModels
     public class Switch
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key, Column("Id")]
+        [Key, Column("SwitchId")]
         public int Id { get; set; }
-
-        //[Index(IsUnique = true), Column("UniqueString"), MaxLength(11)]
-        //public string UniqueStr { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -28,5 +26,7 @@ namespace SwitchesAPI.DB.DbModels
         public int RoomId { get; set; }
 
         public virtual Room Room { get; set; }
+
+        public virtual List<User> Users { get; set; }
     }
 }

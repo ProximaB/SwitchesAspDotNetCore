@@ -9,7 +9,7 @@
   },
   "profiles": {
     "IIS Express": {
-      "commandName": "Project",
+      "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "/swagger",
       "environmentVariables": {
@@ -29,10 +29,11 @@
     "Debug": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "Swagger",
+      "launchUrl": "Swagger/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "http://192.168.0.101:12345"
     }
   }
 }

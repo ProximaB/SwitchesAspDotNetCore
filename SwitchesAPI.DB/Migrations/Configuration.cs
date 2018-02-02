@@ -11,7 +11,7 @@ namespace SwitchesAPI.DB.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(SwitchesAPI.DB.SwitchesContext context)
@@ -30,6 +30,7 @@ namespace SwitchesAPI.DB.Migrations
 
                 new Room() { Id = 4, Name = "Bathroom", Description = "Bathroom..", LastModiDateTime = DateTime.Now }
             );
+            context.SaveChanges();
 
             context.Switches.AddOrUpdate(x => x.Id,
                 new Switch() { Id = 1, Name = "Main Light", Description = "Main light switch...", RoomId = 1, State = "OFF", LastModifieDateTime = DateTime.Now },
@@ -39,11 +40,12 @@ namespace SwitchesAPI.DB.Migrations
                 new Switch() { Id = 4, Name = "Led strap", Description = "Led strap above cabinet...", RoomId = 2, State = "OFF", LastModifieDateTime = DateTime.Now },
 
                 new Switch() { Id = 5, Name = "Main Light", Description = "Main light switch...", RoomId = 3, State = "OFF", LastModifieDateTime = DateTime.Now },
-                new Switch() { Id = 6, Name = "Power outlet", Description = "Power outlet behind the tv...", RoomId = 4, State = "OFF", LastModifieDateTime = DateTime.Now },
+                new Switch() { Id = 6, Name = "Power outlet", Description = "Power outlet behind the tv...", RoomId = 3, State = "OFF", LastModifieDateTime = DateTime.Now },
 
-                new Switch() { Id = 7, Name = "Main Light", Description = "Main light switch...", RoomId = 5, State = "OFF", LastModifieDateTime = DateTime.Now },
-                new Switch() { Id = 8, Name = "Shower light", Description = "Shower ceiling light...", RoomId = 5, State = "OFF", LastModifieDateTime = DateTime.Now }
+                new Switch() { Id = 7, Name = "Main Light", Description = "Main light switch...", RoomId = 4, State = "OFF", LastModifieDateTime = DateTime.Now },
+                new Switch() { Id = 8, Name = "Shower light", Description = "Shower ceiling light...", RoomId = 4, State = "OFF", LastModifieDateTime = DateTime.Now }
             );
+            context.SaveChanges();
         }
 
          static string IdBuilder()

@@ -17,6 +17,6 @@ namespace SwitchesAPI.Interfaces
 
         bool Delete(int roomId);
 
-        int? LastUpdatedId { get; set; }
+        int? LastUpdatedId { get; }
     }
 }

@@ -12,7 +12,7 @@ namespace SwitchesAPI.Services
     {
         private readonly SwitchesContext _context;
 
-        public int? LastUpdatedId { get; set; }
+        public int? LastUpdatedId { get; private set; }
 
         public SwitchesService (SwitchesContext context)
         {

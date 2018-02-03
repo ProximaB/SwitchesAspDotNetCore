@@ -16,6 +16,7 @@ namespace SwitchesAPI.DB.DbModels
         [Column("Password Salt")]
         public string PasswordSalt { get; set; }
         public string Password { get; set; }
+        [Column("Create Date")]
         public DateTime CreateDate { get; set; }
 
         public virtual List<Switch> Switches { get; set; }

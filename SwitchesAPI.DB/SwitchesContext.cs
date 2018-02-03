@@ -23,10 +23,12 @@ namespace SwitchesAPI.DB
                 .WithMany(s => s.Users)
                 .Map(cs =>
                 {
-                    cs.MapLeftKey("Id");
+                    cs.MapLeftKey("UserId");
                     cs.MapRightKey("SwitchId");
                     cs.ToTable("UserSwitches");
                 });
+
+            base.OnModelCreating(modelBuilder);
 
         }
 

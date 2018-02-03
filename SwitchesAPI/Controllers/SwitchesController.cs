@@ -17,14 +17,13 @@ namespace SwitchesAPI.Controllers
     public class SwitchesController : Controller, INotifyPropertyChanged
     {
         private readonly NotificationsMessageHandler _notificationsMessageHandler;
-        private readonly IRoomsService _roomsService;
+ 
         private readonly ISwitchesService _switchesService;
 
-        public SwitchesController (ISwitchesService switchesService, IRoomsService roomsServices,
+        public SwitchesController (ISwitchesService switchesService, 
             NotificationsMessageHandler notificationsMessageHandler)
         {
             _switchesService = switchesService;
-            _roomsService = roomsServices;
             _notificationsMessageHandler = notificationsMessageHandler;
         }
 

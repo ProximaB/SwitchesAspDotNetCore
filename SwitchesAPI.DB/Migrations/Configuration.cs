@@ -43,8 +43,12 @@ namespace SwitchesAPI.DB.Migrations
                 new Switch() { Id = 6, Name = "Power outlet", Description = "Power outlet behind the tv...", RoomId = 3, State = "OFF", LastModifieDateTime = DateTime.Now },
 
                 new Switch() { Id = 7, Name = "Main Light", Description = "Main light switch...", RoomId = 4, State = "OFF", LastModifieDateTime = DateTime.Now },
-                new Switch() { Id = 8, Name = "Shower light", Description = "Shower ceiling light...", RoomId = 4, State = "OFF", LastModifieDateTime = DateTime.Now }
+                new Switch() { Id = 8, Name = "Shower light", Description = "Shower ceiling light...", RoomId = 4, State = "OFF", LastModifieDateTime = DateTime.Now}
             );
+            context.SaveChanges();
+
+            context.Users.AddOrUpdate(x => x.Id,
+                new User() { Id = 1, Name = "User1", Password = IdBuilder(), PasswordSalt = IdBuilder(), CreateDate = DateTime.Now });
             context.SaveChanges();
         }
 

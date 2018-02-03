@@ -15,6 +15,6 @@ namespace SwitchesAPI.Interfaces
 
         bool Delete(int switchId);
 
-        int? LastUpdatedId { get; set; }
+        int? LastUpdatedId { get; }
     }
 }

@@ -39,6 +39,8 @@ namespace SwitchesAPI
 
             services.AddScoped<ISwitchesService, SwitchesService>();
             services.AddScoped<IRoomsService, RoomsService>();
+            services.AddScoped<IUsersService, UsersService>();
+
             services.AddScoped<SwitchesContext>();
 
             services.AddSwaggerGen(c =>

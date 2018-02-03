@@ -13,7 +13,7 @@ namespace SwitchesAPI.Services
     {
         private readonly SwitchesContext context;
 
-        public int? LastUpdatedId { get; set; }
+        public int? LastUpdatedId { get; private set; }
 
         public RoomsService (SwitchesContext context)
         {

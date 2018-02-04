@@ -1,0 +1,74 @@
+Enable-Migrations
+
+Update-Database
+
+
+Fluent Api, okreslanie dekoracje w kodzie context
+
+class MyContext : DbContext
+{
+    public DbSet<Blog> Blogs { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Blog>()
+            .Property(b => b.Url)
+            .IsRequired();
+    }
+}
+
+public class Blog
+{
+    public int BlogId { get; set; }
+    public string Url { get; set; }
+}
+
+
+DataTime:
+[Column(TypeName="Date")]
+[Display(Name = "Data Spacja")] Nazwy ze specjami.
+public DateTime ReportDate { get; set; }
+
+
+Switches Sample:
+	
+{
+  "name": "Switch 1",
+  "description": "Switch 1",
+  "state": "ON",
+  "roomId": 6
+}
+{
+  "name": "Switch 2",
+  "description": "string",
+  "state": "ON",
+  "roomId": 7
+}
+{
+  "name": "Switch 3",
+  "description": "Switch 3",
+  "state": "OFF",
+  "roomId": 8
+}
+{
+  "name": "Switch 4",
+  "description": "string",
+  "state": "OFF",
+  "roomId": 6
+}
+
+Rooms Sample:
+[
+{
+  "name": "Room1",
+  "description": "Room1"
+},
+{
+  "name": "Room2",
+  "description": "Room2"
+},
+{
+  "name": "Room3",
+  "description": "Room3"
+}
+]

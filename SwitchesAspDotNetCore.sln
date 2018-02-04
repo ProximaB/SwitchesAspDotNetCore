@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwitchesAPI", "SwitchesAPI\SwitchesAPI.csproj", "{630596D3-CE31-437E-ABB7-40E390FED0D9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1B30573E-E88C-4DB0-956E-3B3085B4CB9C} = {1B30573E-E88C-4DB0-956E-3B3085B4CB9C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwitchesAPI.DB", "SwitchesAPI.DB\SwitchesAPI.DB.csproj", "{1B30573E-E88C-4DB0-956E-3B3085B4CB9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{630596D3-CE31-437E-ABB7-40E390FED0D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{630596D3-CE31-437E-ABB7-40E390FED0D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{630596D3-CE31-437E-ABB7-40E390FED0D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{630596D3-CE31-437E-ABB7-40E390FED0D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B30573E-E88C-4DB0-956E-3B3085B4CB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B30573E-E88C-4DB0-956E-3B3085B4CB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B30573E-E88C-4DB0-956E-3B3085B4CB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B30573E-E88C-4DB0-956E-3B3085B4CB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE599F56-E7FF-472F-974E-C4D1707AA1F8}
+	EndGlobalSection
+EndGlobal

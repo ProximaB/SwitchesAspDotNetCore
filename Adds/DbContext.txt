@@ -1,0 +1,3 @@
+public MoviesContext(): base("Data Source=.;Initial Catalog=MoviesAPIDb;Integrated Security=True")
+        {
+        }

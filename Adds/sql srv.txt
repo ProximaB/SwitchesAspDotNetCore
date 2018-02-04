@@ -1,0 +1,1 @@
+TRUNCATE TABLE Table_Name - usuwa wszystko z tabeli, ID start od 1

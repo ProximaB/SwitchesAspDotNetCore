@@ -1,0 +1,19 @@
+services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Version = "v1", Title = "Movies API", });
+                c.CustomSchemaIds(i => i.FullName);
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var xmlPath = Path.Combine(basePath, "MoviesAPI.xml");
+                c.IncludeXmlComments(xmlPath);
+            });
+
+
+
+
+app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                var swaggerPath = "/swagger/v1/swagger.json";
+                c.SwaggerEndpoint(swaggerPath, "Movies API V1");
+            });

@@ -1,0 +1,3 @@
+services.AddAutoMapper(
+                opt => opt.CreateMissingTypeMaps = true,
+                Assembly.GetEntryAssembly());

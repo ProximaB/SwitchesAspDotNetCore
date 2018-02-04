@@ -1,0 +1,26 @@
+Enable-Migrations -StartUpProjectName SwitchesAPI.DB 
+Add-Migration {{NAME}} -StartUpProjectName SwitchesAPI.DB 
+Update-Database -StartUpProjectName SwitchesAPI.DB 
+
+Enable-Migrations -StartUpProjectName SwitchesAPI.DB 
+
+Add-Migration {{NAME}} -StartUpProjectName SwitchesAPI.DB
+
+Update-Database -StartUpProjectName SwitchesAPI.DB
+
+
+
+Add-Migration {Initail_Migration} -StartUpProjectName SwitchesAPI.DB
+
+Update-Database –TargetMigration:201712191711094_Reset
+Update-Database -StartUpProjectName SwitchesAPI.DB –TargetMigration:201712191711094_Reset
+
+
+EntityFramework\Update-Database -StartUpProjectName SwitchesAPI.DB
+
+
+EntityFramework\Add-Migration {migrUsers} -StartUpProjectName SwitchesAPI.DB
+
+PM> EntityFrameworkCore\Add-Migration {Initail_Migration} -StartUpProjectName SwitchesAPI.DB
+
+EntityFrameworkCore\Update-Database

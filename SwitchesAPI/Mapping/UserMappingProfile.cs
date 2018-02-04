@@ -6,7 +6,7 @@ namespace SwitchesAPI.Mapping
 {
     public class UserMappingProfile : Profile
     {
-        UserMappingProfile()
+        public UserMappingProfile()
         {
             CreateMap<UserRequest, User>();
             CreateMap<User, UserResponse>();

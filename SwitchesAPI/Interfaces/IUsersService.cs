@@ -11,13 +11,15 @@ namespace SwitchesAPI.Interfaces
     {
         List<User> GetAll ();
         User GetById (int id);
-        List<Switch> GetUserSwitches(int id);
-        List<dynamic> GetUserRooms(int id);
-        (string PasswordSalt, string Password) GetUserCredentials ();
+        List<Switch> GetUserSwitches (int id);
+        List<Room> GetUserRooms (int id);
+        bool AddSwitchToUser (int switchId, int userId);
+        (string PasswordSalt, string Password) GetUserCredentials (string userName);
         bool AddNewUser (User user);
         bool UpdateUser (User user);
-        bool DeleteUser (User user);
-        void operations ();
+        bool DeleteUser (int userId);
+
+        int LastUpdatedId { get; }
     }
 }
 // Adding New User, New user first login set password

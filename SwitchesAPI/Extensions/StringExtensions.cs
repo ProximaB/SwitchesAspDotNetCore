@@ -6,9 +6,9 @@ namespace SwitchesAPI.Extensions
 {
     static class StringExtensions
     {
-        public static string IdBuilder(this string value, int length) // bardziej pasowałby helper, chyba, że bedzie dodawal
+        public static string GetSalt(this string value, int length) // bardziej pasowałby helper, chyba, że bedzie dodawal
         {                                                               // do isteijace stringa dodatkową wartośc bedąca identyfikatorem
-            StringBuilder IdBuilder = new StringBuilder();               // np "id_".IdBuilder(6) => "id_E4Sfs3"
+            StringBuilder GetSalt = new StringBuilder();               // np "id_".IdBuilder(6) => "id_E4Sfs3"
             Enumerable
                .Range(65, 26)
                 .Select(e => ((char)e).ToString())
@@ -16,9 +16,9 @@ namespace SwitchesAPI.Extensions
                 .Concat(Enumerable.Range(0, 10).Select(e => e.ToString()))
                 .OrderBy(e => Guid.NewGuid())
                 .Take(length)
-                .ToList().ForEach(e => IdBuilder.Append(e));
+                .ToList().ForEach(e => GetSalt.Append(e));
 
-            return value + IdBuilder;
+            return value + GetSalt;
         }   
     }
 }

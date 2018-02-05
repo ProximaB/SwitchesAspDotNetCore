@@ -55,10 +55,10 @@ namespace SwitchesAPI.Services
             return true;
         }
 
-        public bool UpdateSwitch (Switch _switch)
+        public bool UpdateSwitch (int switchId, Switch _switch)
         {
 
-            Switch foundSwitch = _context.Switches.Find(_switch.Id);
+            Switch foundSwitch = _context.Switches.Find(switchId);
 
             if ( foundSwitch == null )
             {

@@ -69,13 +69,13 @@ namespace SwitchesAPI.Controllers
         /// <summary>
         ///     Add new switch to repositorium
         /// </summary>
-        /// <param name="switch">new switch</param>
+        /// <param name="_switch">new switch</param>
         /// <returns></returns>
         [HttpPost]
         [ModelValidation]
-        public IActionResult Post ([FromBody] SwitchRequest swth)
+        public IActionResult Post ([FromBody] SwitchRequest _switch)
         {
-            if ( !_switchesService.AddNewSwitch(Mapper.Map<Switch>(swth)) )
+            if ( !_switchesService.AddNewSwitch(Mapper.Map<Switch>(_switch)) )
             {
                 return BadRequest();
             }
@@ -97,9 +97,8 @@ namespace SwitchesAPI.Controllers
         public IActionResult Put (int switchId, [FromBody] SwitchRequest switchRequest)
         {
             Switch swth = Mapper.Map<Switch>(switchRequest);
-            swth.Id = switchId;
 
-            if ( !_switchesService.UpdateSwitch(swth) )
+            if ( !_switchesService.UpdateSwitch(switchId, swth) )
             {
                 return BadRequest();
             }
@@ -127,7 +126,7 @@ namespace SwitchesAPI.Controllers
             }
 
             _swth.State = state;
-            if ( !_switchesService.UpdateSwitch(_swth) )
+            if ( !_switchesService.UpdateSwitch(switchId, _swth) )
             {
                 return BadRequest();
             }

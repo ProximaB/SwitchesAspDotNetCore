@@ -14,12 +14,14 @@ namespace SwitchesAPI.Interfaces
         List<Switch> GetUserSwitches (int id);
         List<Room> GetUserRooms (int id);
         bool AddSwitchToUser (int switchId, int userId);
+        bool AddNewSwitchToRepo(int userId, Switch _switch);
         (string PasswordSalt, string Password) GetUserCredentials (string userName);
         bool AddNewUser (User user);
         bool UpdateUser (User user);
         bool DeleteUser (int userId);
 
-        int LastUpdatedId { get; }
+        int? LastUpdatedId { get; }
+        bool UpdateUserSwitch(int userId, int switchId, Switch _switch);
     }
 }
 // Adding New User, New user first login set password

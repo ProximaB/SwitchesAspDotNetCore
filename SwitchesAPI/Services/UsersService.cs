@@ -19,7 +19,7 @@ namespace SwitchesAPI.Services
     {
         private readonly SwitchesContext context;
 
-        public int LastUpdatedId { get; private set; }
+        public int? LastUpdatedId { get; private set; }
 
         public UsersService (SwitchesContext _context) => context = _context;
 
@@ -45,8 +45,7 @@ namespace SwitchesAPI.Services
                 .Select(sw => sw.Switch).ToList();
             return userSwitches;
         }
-       
-        [Route("{id}/Rooms")]
+
         public List<Room> GetUserRooms (int id)
         {
             var rooms = new List<Room>();
@@ -59,25 +58,58 @@ namespace SwitchesAPI.Services
 
             var userRoomsIds = userSwitches.GroupBy(sw => sw.RoomId).Select(g => g.Key).ToList();
 
-            foreach (var roomId in userRoomsIds )
+            foreach ( var roomId in userRoomsIds )
             {
                 rooms.Add(context.Rooms.Find(roomId));
             }
 
             //var userSwitchesCount = users.FirstOrDefault(u => u.Id == id).UserSwitches.Where(e => e.UserId == id)
             //    .Select(us => us.Switch).GroupBy(sw => new { sw.Id, sw.RoomId }).Select(g => g.Count()).ToList();
-       
+
             return rooms;
         }
 
-        public bool AddSwitchToUser(int switchId, int userId)
+        public bool UpdateUserSwitch (int userId, int switchId, Switch _switch)
+        {
+            var userSwitch = context.UserSwitches.Include(u => u.User).Include(s => s.Switch)
+                .FirstOrDefault(us => us.UserId == userId && us.SwitchId == switchId);
+
+
+            Switch foundSwitch = userSwitch.Switch;
+
+            if ( foundSwitch == null )
+            {
+                return false;
+            }
+
+            foundSwitch.LastModifieDateTime = DateTime.Now;
+            foundSwitch.Name = _switch.Name;
+            foundSwitch.Description = _switch.Description;
+            foundSwitch.RoomId = _switch.RoomId;
+            foundSwitch.State = _switch.State;
+
+            try
+            {
+                context.SaveChanges();
+            }
+            catch ( Exception )
+            {
+                return false;
+            }
+
+
+            return true;
+        }
+
+
+        public bool AddSwitchToUser (int switchId, int userId)
         {
             var _switch = context.Switches.Find(switchId);
             var user = context.Users.Find(userId);
 
-            if ( _switch == null || user == null) return false;
+            if ( _switch == null || user == null ) return false;
 
-            if (context.UserSwitches.FirstOrDefault(u => u.SwitchId == _switch.Id && u.UserId == user.Id) != null)
+            if ( context.UserSwitches.FirstOrDefault(u => u.SwitchId == _switch.Id && u.UserId == user.Id) != null )
             {
                 return true;
             }
@@ -85,7 +117,7 @@ namespace SwitchesAPI.Services
             var users = context.Users
                 .Include(e => e.UserSwitches)
                 .ThenInclude(e => e.Switch)
-                .ToList();           
+                .ToList();
 
             try
             {
@@ -99,6 +131,31 @@ namespace SwitchesAPI.Services
 
             return true;
 
+        }
+
+        public bool AddNewSwitchToRepo (int userId, Switch _switch)
+        {
+
+            if ( _switch == null )
+            {
+                return false;
+            }
+
+            _switch.LastModifieDateTime = DateTime.Now;
+
+            try
+            {
+                context.Switches.Add(_switch);
+                context.SaveChanges();
+                LastUpdatedId = _switch.Id;
+            }
+            catch ( DbUpdateException )
+            {
+
+                return false;
+            }
+
+            return AddSwitchToUser(_switch.Id, userId);
         }
 
         public (string PasswordSalt, string Password) GetUserCredentials (string userName)
@@ -119,9 +176,9 @@ namespace SwitchesAPI.Services
 
             user.CreateDate = DateTime.Now;
             user.PasswordSalt = String.Empty.GetSalt(11);
-           
+
             user.Password = AuthenticationHashHandler.GenerateSaltedHash(user.Password, user.PasswordSalt);
- 
+
 
             try
             {
@@ -168,7 +225,7 @@ namespace SwitchesAPI.Services
         {
             var user = context.Users.FirstOrDefault(u => u.Id == userId);
 
-            if (user == null)
+            if ( user == null )
             {
                 return true;
             }
@@ -179,7 +236,7 @@ namespace SwitchesAPI.Services
             {
                 context.SaveChanges();
             }
-            catch (DbUpdateException)
+            catch ( DbUpdateException )
             {
                 return false;
             }

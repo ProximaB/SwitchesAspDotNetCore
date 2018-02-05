@@ -102,6 +102,7 @@ namespace SwitchesAPI.Controllers
             // return Ok(AutoMapper.Mapper.Map<List<RoomResponse>>(_room));   
             return Get(roomId);
         }
+
         //public IActionResult Put([FromBody]RoomRequestPut room)
         //{
         //    if (roomsService.UpdateRoom(AutoMapper.Mapper.Map<Room>(room)))

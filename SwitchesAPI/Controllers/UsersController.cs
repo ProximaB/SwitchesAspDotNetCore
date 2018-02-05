@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SwitchesAPI.DB.DbModels;
 using SwitchesAPI.Filters;
+using SwitchesAPI.Handlers.WebSocketsHandlers;
 using SwitchesAPI.Interfaces;
 using SwitchesAPI.Models;
 
@@ -15,18 +17,24 @@ namespace SwitchesAPI.Controllers
     public class UsersController : Controller
     {
         private readonly IUsersService usersService;
+
+       // private readonly SwitchChangedHandler _switchChangedHandler;
+
+        private readonly NotificationsMessageHandler _notificationsMessageHandler;
         // Adding New User, New user first login set password
         // Adding Switches to users....
         // returning Get Switches depend on user login in
 
-        public UsersController (IUsersService usersService)
+        public UsersController (IUsersService usersService, SwitchChangedHandler switchChangedHandler, NotificationsMessageHandler notificationsMessageHandler)
         {
             this.usersService = usersService;
+            _notificationsMessageHandler = notificationsMessageHandler;
         }
 
         /// <summary>
         /// Get all Users
         /// </summary>
+        /// <
         /// <returns></returns>
         [HttpGet]
         public IActionResult GetAll ()
@@ -37,13 +45,12 @@ namespace SwitchesAPI.Controllers
         /// <summary>
         /// Get User by Id
         /// </summary>
-        /// <param name="roomId">Room id</param>
+        /// <param name="userId">Room id</param>
         /// <returns>Room if exist</returns>
-        [Route("{id}")]
-        [HttpGet]
-        public IActionResult GetUserById (int id)
+        [HttpGet("{id}")]
+        public IActionResult GetUserById (int userId)
         {
-            User user = usersService.GetById(id);
+            User user = usersService.GetById(userId);
 
             if ( user == null )
             {
@@ -57,8 +64,7 @@ namespace SwitchesAPI.Controllers
         /// </summary>
         /// <param name="id">user Id</param>
         /// <returns>Room's switches if exist</returns>
-        [HttpGet]
-        [Route("{id}/Switches")]
+        [HttpGet("{id}/Switches")]
         public IActionResult GetUserSwitches (int id)
         {
             var switches = usersService.GetUserSwitches(id);
@@ -76,8 +82,7 @@ namespace SwitchesAPI.Controllers
         /// <param name="userId">User Id</param>
         /// <param name="switchId">Switch Id</param>
         /// <returns>Room's switches if exist</returns>
-        [HttpGet]
-        [Route("{UserId}/Switch/{switchId}")]
+        [HttpGet("{UserId}/Switches/{switchId}")]
         public IActionResult GetUserSwitch (int userId, int switchId)
         {
             var switches = usersService.GetUserSwitches(userId);
@@ -95,8 +100,7 @@ namespace SwitchesAPI.Controllers
         /// </summary>
         /// <param name="id">User Id</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("{id}/Rooms")]
+        [HttpGet("{id}/Rooms")]
         public IActionResult GetUserRooms (int id)
         {
             var rooms = usersService.GetUserRooms(id);
@@ -108,25 +112,24 @@ namespace SwitchesAPI.Controllers
             return Ok(AutoMapper.Mapper.Map<List<RoomResponse>>(rooms));
         }
         // <summary>
-        /// Add switch to User.
+        /// Add exist switch to User.
         /// </summary>
         /// <param name="userId">User Id</param>
         /// <param name="switchId">Switch Id</param>
+        /// <response code="200">User added!</response>
         /// <returns></returns>
-        [Route("{userId}/AddSwiitch/{switchId}")]
-        [HttpGet]
-        public IActionResult AddSwitchToUser(int userId, int switchId)
+        [HttpGet("{userId}/AddSwitch/{switchId}")]
+        public IActionResult AddSwitchToUser (int userId, int switchId)
         {
-            if (!usersService.AddSwitchToUser(switchId, userId) )
+            if ( !usersService.AddSwitchToUser(switchId, userId) )
             {
-             return BadRequest();
+                return BadRequest();
             }
 
             return (GetUserSwitch(userId, switchId));
         }
 
-        [Route("{userName}/GetUserCredentials")]
-        [HttpGet]
+        [HttpGet("{userName}/GetUserCredentials")]
         public IActionResult GetUserCredentials (string userName)
         {
             return Ok(usersService.GetUserCredentials(userName));
@@ -139,19 +142,40 @@ namespace SwitchesAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [ModelValidation]
-        public IActionResult Post([FromBody] UserRequest user)
+        public IActionResult Post ([FromBody] UserRequest user)
         {
-            if (!usersService.AddNewUser(Mapper.Map<User>(user)))
+            if ( !usersService.AddNewUser(Mapper.Map<User>(user)) )
             {
                 return BadRequest();
             }
 
-            int userId = usersService.LastUpdatedId;
-            var createdUser= usersService.GetById(userId);
+            int userId = usersService.LastUpdatedId ?? throw new NullReferenceException();
+            var createdUser = usersService.GetById(userId);
 
             return Ok(Mapper.Map<UserResponse>(createdUser));
 
         }
+
+        /// <summary>
+        ///     Add new switch to repositorium
+        /// </summary>
+        /// <param name="userId">new switch</param>
+        /// <param name="_switch">new switch</param>
+        /// <returns></returns>
+        [HttpPost("{userId}/Switches")]
+        [ModelValidation]
+        public IActionResult Post (int userId, [FromBody] SwitchRequest _switch)
+        {
+            if ( !usersService.AddNewSwitchToRepo(userId, Mapper.Map<Switch>(_switch)) )
+            {
+                return BadRequest();
+            }
+
+            int switchId = usersService.LastUpdatedId ?? throw new NullReferenceException();
+
+            return GetUserSwitch(userId, switchId);
+        }
+
 
         /// <summary>
         ///     Update User in repositorium
@@ -164,7 +188,7 @@ namespace SwitchesAPI.Controllers
             User user = Mapper.Map<User>(_user);
             user.Id = userId;
 
-            if ( !usersService.UpdateUser(user))
+            if ( !usersService.UpdateUser(user) )
             {
                 return BadRequest();
             }
@@ -173,6 +197,64 @@ namespace SwitchesAPI.Controllers
             // return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
             return GetUserById(userId);
         }
+
+        /// <summary>
+        /// Update User's Switch in repositorium
+        /// </summary>
+        /// <param name="userId">user Id</param>
+        /// <param name="switchId">updated switchId</param>
+        /// <param name="_switch">updated switch</param>
+        /// <returns></returns>
+        [HttpPut("{userId}/Switches/{switchId}")]
+        public IActionResult Put (int userId, int switchId, [FromBody] RoomRequest _switch)
+        {
+            if ( !usersService.UpdateUserSwitch(userId, switchId, AutoMapper.Mapper.Map<Switch>(_switch)) )
+            {
+                return BadRequest();
+            }
+
+            //Room _room = roomsService.GetById(roomId);
+            // return Ok(AutoMapper.Mapper.Map<List<RoomResponse>>(_room));   
+            return GetUserSwitch(userId, switchId);
+        }
+
+        /// <summary>
+        ///     Update state of switch by Id.
+        /// </summary>
+        /// <param name="userId">Updated switch Id</param>
+        /// <param name="switchId">Updated switch Id</param>
+        /// <param name="state">state of Switch [ON/OFF]</param>
+        /// <returns></returns>
+        [HttpPut("{userId}/Switches/{switchId}/{state}")] //TODO
+        public async Task<IActionResult> PutAsync (int userId, int switchId, string state)
+        {
+            var switches = usersService.GetUserSwitches(userId);
+            var _swth = switches.FirstOrDefault(s => s.Id == switchId);
+
+            if ( _swth.State == state )
+            {
+                return GetUserSwitch(userId, switchId);
+                // return NoContent();
+            }
+
+            _swth.State = state;
+            if ( !usersService.UpdateUserSwitch(userId, switchId, _swth) )
+            {
+                return BadRequest();
+            }
+
+            //if (!_switchesService.UpdateSwitch(_switch))
+            //{
+            //    return BadRequest("State can only be \"ON\" or \"OFF\")");
+            //}
+
+            //var sw = _switchesService.GetById(switchId);
+            //return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
+            var message = $"{switchId}:{state}";
+            await _notificationsMessageHandler.SendMessageToAllAsync(message);
+            return GetUserSwitch(userId, switchId);
+        }
+
 
         /// <summary>
         ///     Delete User from repositorium

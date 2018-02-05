@@ -43,7 +43,7 @@ namespace SwitchesAPI
             {
                 c.SwaggerDoc("v1", new Info { Version = "v1", Title = "Switches API", });
                 c.CustomSchemaIds(i => i.FullName);
-                var basePath = System.AppContext.BaseDirectory;
+                var basePath = AppContext.BaseDirectory;
                 var xmlPath = Path.Combine(basePath, "SwitchesAPI.xml");
                 c.IncludeXmlComments(xmlPath);
             });
@@ -60,7 +60,7 @@ namespace SwitchesAPI
             }
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://192.168.0.101")
+                builder.WithOrigins("http://localhost:12345")
                     .AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
             );
 
@@ -72,7 +72,6 @@ namespace SwitchesAPI
             app.UseStaticFiles();
             //
 
-            app.UseMiddleware<AuthenticationMiddleware>();
 
 
             //app.Use(async (context, next) =>
@@ -102,15 +101,17 @@ namespace SwitchesAPI
             app.MapWebSocketManager("/notifications", serv.GetService<NotificationsMessageHandler>());
             app.MapWebSocketManager("/SwitchChanged", serv.GetService<SwitchChangedHandler>());
 
+            app.UseMiddleware<AuthenticationMiddleware>();
+
+            app.UseMvc();
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
             {
                 var swaggerPath = "/swagger/v1/swagger.json";
                 c.SwaggerEndpoint(swaggerPath, "Switches API V1");
-            });
-
-            app.UseMvc();
+            });     
         }
     }
 }

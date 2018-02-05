@@ -63,7 +63,7 @@
             <summary>
                 Add new switch to repositorium
             </summary>
-            <param name="switch">new switch</param>
+            <param name="_switch">new switch</param>
             <returns></returns>
         </member>
         <member name="M:SwitchesAPI.Controllers.SwitchesController.Put(System.Int32,SwitchesAPI.Models.SwitchRequest)">
@@ -89,17 +89,12 @@
             <param name="switchId">switch identifier</param>
             <returns></returns>
         </member>
-        <member name="M:SwitchesAPI.Controllers.UsersController.GetAll">
-            <summary>
-            Get all Users
-            </summary>
-            <returns></returns>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:SwitchesAPI.Controllers.UsersController.GetAll" -->
         <member name="M:SwitchesAPI.Controllers.UsersController.GetUserById(System.Int32)">
             <summary>
             Get User by Id
             </summary>
-            <param name="roomId">Room id</param>
+            <param name="userId">Room id</param>
             <returns>Room if exist</returns>
         </member>
         <member name="M:SwitchesAPI.Controllers.UsersController.GetUserSwitches(System.Int32)">
@@ -125,11 +120,37 @@
             <para name="user">user</para>
             <returns></returns>
         </member>
+        <member name="M:SwitchesAPI.Controllers.UsersController.Post(System.Int32,SwitchesAPI.Models.SwitchRequest)">
+            <summary>
+                Add new switch to repositorium
+            </summary>
+            <param name="userId">new switch</param>
+            <param name="_switch">new switch</param>
+            <returns></returns>
+        </member>
         <member name="M:SwitchesAPI.Controllers.UsersController.Put(System.Int32,SwitchesAPI.Models.UserRequest)">
             <summary>
                 Update User in repositorium
             </summary>
             <param name="userId">Updated userId</param>
+            <returns></returns>
+        </member>
+        <member name="M:SwitchesAPI.Controllers.UsersController.Put(System.Int32,System.Int32,SwitchesAPI.Models.RoomRequest)">
+            <summary>
+            Update User's Switch in repositorium
+            </summary>
+            <param name="userId">user Id</param>
+            <param name="switchId">updated switchId</param>
+            <param name="_switch">updated switch</param>
+            <returns></returns>
+        </member>
+        <member name="M:SwitchesAPI.Controllers.UsersController.PutAsync(System.Int32,System.Int32,System.String)">
+            <summary>
+                Update state of switch by Id.
+            </summary>
+            <param name="userId">Updated switch Id</param>
+            <param name="switchId">Updated switch Id</param>
+            <param name="state">state of Switch [ON/OFF]</param>
             <returns></returns>
         </member>
         <member name="M:SwitchesAPI.Controllers.UsersController.Delete(System.Int32)">

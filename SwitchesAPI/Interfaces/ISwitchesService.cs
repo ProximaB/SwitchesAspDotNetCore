@@ -10,8 +10,7 @@ namespace SwitchesAPI.Interfaces
         Switch GetById(int switchId);
 
         bool AddNewSwitch(Switch swth);
-
-        bool UpdateSwitch(Switch swth);
+        bool UpdateSwitch(int switchId, Switch _switch);
 
         bool Delete(int switchId);
 

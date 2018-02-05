@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace SwitchesAPI.Handlers.WebSocketsHandlers
 {
-    public class ChatMessageHandler : WebSocketHandler
+    public class BoardNotificationsHandler : WebSocketHandler
     {
-        SwitchesAPI.DB.SwitchesContext _context;
-        public ChatMessageHandler(WebSocketConnectionManager webSocketConnectionManager) : base(webSocketConnectionManager)
+        public BoardNotificationsHandler(WebSocketConnectionManager webSocketConnectionManager) : base(webSocketConnectionManager)
         {
         }
 
@@ -30,8 +29,8 @@ namespace SwitchesAPI.Handlers.WebSocketsHandlers
             var state = msg[1];
             if(state == "ON" || state == "OFF")
             {
-                _context.Switches.Find(id).State = state;
-                _context.SaveChanges();
+                //_context.Switches.Find(id).State = state;
+                //_context.SaveChanges();
             }
            
             await SendMessageToAllAsync(message);

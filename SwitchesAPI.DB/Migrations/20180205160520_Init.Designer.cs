@@ -11,8 +11,8 @@ using System;
 namespace SwitchesAPI.DB.Migrations
 {
     [DbContext(typeof(SwitchesContext))]
-    [Migration("20180203230411_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20180205160520_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -77,6 +77,7 @@ namespace SwitchesAPI.DB.Migrations
                         .HasColumnName("Create Date");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(20);
 
                     b.Property<string>("Password");
@@ -85,6 +86,9 @@ namespace SwitchesAPI.DB.Migrations
                         .HasColumnName("Password Salt");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -99,7 +103,7 @@ namespace SwitchesAPI.DB.Migrations
 
                     b.HasIndex("SwitchId");
 
-                    b.ToTable("UserSwitch");
+                    b.ToTable("UserSwitches");
                 });
 
             modelBuilder.Entity("SwitchesAPI.DB.DbModels.Switch", b =>

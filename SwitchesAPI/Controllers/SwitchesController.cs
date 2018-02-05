@@ -17,14 +17,16 @@ namespace SwitchesAPI.Controllers
     public class SwitchesController : Controller, INotifyPropertyChanged
     {
         private readonly NotificationsMessageHandler _notificationsMessageHandler;
- 
+        private readonly SwitchChangedHandler _switchChangedHandler;
+
         private readonly ISwitchesService _switchesService;
 
         public SwitchesController (ISwitchesService switchesService, 
-            NotificationsMessageHandler notificationsMessageHandler)
+            NotificationsMessageHandler notificationsMessageHandler, SwitchChangedHandler switchChangedHandler)
         {
             _switchesService = switchesService;
             _notificationsMessageHandler = notificationsMessageHandler;
+            _switchChangedHandler = switchChangedHandler;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -81,6 +83,7 @@ namespace SwitchesAPI.Controllers
             int switchId = _switchesService.LastUpdatedId ?? throw new NullReferenceException();
             var _swth = _switchesService.GetById(switchId);
 
+            _switchChangedHandler.SendActionToAll(switchId, SwitchChangedHandler.Action.POST, Mapper.Map<SwitchResponse>(_swth));
             return Ok(Mapper.Map<SwitchResponse>(_swth));
         }
 

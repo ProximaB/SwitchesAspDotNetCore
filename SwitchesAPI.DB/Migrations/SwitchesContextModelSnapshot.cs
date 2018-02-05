@@ -76,6 +76,7 @@ namespace SwitchesAPI.DB.Migrations
                         .HasColumnName("Create Date");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(20);
 
                     b.Property<string>("Password");
@@ -84,6 +85,9 @@ namespace SwitchesAPI.DB.Migrations
                         .HasColumnName("Password Salt");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });

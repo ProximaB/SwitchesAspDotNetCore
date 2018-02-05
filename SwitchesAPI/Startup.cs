@@ -13,6 +13,7 @@ using SwitchesAPI.Extensions.WebSocketManager;
 using SwitchesAPI.Handlers.WebSocketsHandlers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
+using SwitchesAPI.Middleware;
 
 namespace SwitchesAPI
 {
@@ -71,7 +72,7 @@ namespace SwitchesAPI
             app.UseStaticFiles();
             //
 
-            // app.UseMiddleware<AuthenticationMiddleware>();
+            app.UseMiddleware<AuthenticationMiddleware>();
 
 
             //app.Use(async (context, next) =>
@@ -97,9 +98,9 @@ namespace SwitchesAPI
 
             app.UseWebSockets();
 
-            //app.MapWebSocketManager("/ws", serv.GetService<ChatMessageHandler>());
-            //app.MapWebSocketManager("/test", serv.GetService<ChatMessageHandler>());
+            //app.MapWebSocketManager("/test", serv.GetService<BoardNotificationsHandler>());
             app.MapWebSocketManager("/notifications", serv.GetService<NotificationsMessageHandler>());
+            app.MapWebSocketManager("/SwitchChanged", serv.GetService<SwitchChangedHandler>());
 
             app.UseSwagger();
 

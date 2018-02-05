@@ -10,6 +10,7 @@ using System.Net.WebSockets;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using SwitchesAPI.DB;
 
 namespace SwitchesAPI.Middleware
 {
@@ -17,12 +18,14 @@ namespace SwitchesAPI.Middleware
     {
         private readonly RequestDelegate _next;
         private WebSocketHandler _webSocketHandler { get; set; }
+        //private SwitchesContext _context { get; set; }
 
         public WebSocketManagerMiddleware(RequestDelegate next,
-                                          WebSocketHandler webSocketHandler)
+                                          WebSocketHandler webSocketHandler) //, SwitchesContext context)
         {
             _next = next;
             _webSocketHandler = webSocketHandler;
+            //_context = context;
         }
 
         public async Task Invoke(HttpContext context)

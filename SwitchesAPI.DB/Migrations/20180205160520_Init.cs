@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SwitchesAPI.DB.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,7 +31,7 @@ namespace SwitchesAPI.DB.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CreateDate = table.Column<DateTime>(name: "Create Date", nullable: false),
-                    Name = table.Column<string>(maxLength: 20, nullable: true),
+                    Name = table.Column<string>(maxLength: 20, nullable: false),
                     Password = table.Column<string>(nullable: true),
                     PasswordSalt = table.Column<string>(name: "Password Salt", nullable: true)
                 },
@@ -64,7 +64,7 @@ namespace SwitchesAPI.DB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserSwitch",
+                name: "UserSwitches",
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
@@ -72,15 +72,15 @@ namespace SwitchesAPI.DB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserSwitch", x => new { x.UserId, x.SwitchId });
+                    table.PrimaryKey("PK_UserSwitches", x => new { x.UserId, x.SwitchId });
                     table.ForeignKey(
-                        name: "FK_UserSwitch_Switches_SwitchId",
+                        name: "FK_UserSwitches_Switches_SwitchId",
                         column: x => x.SwitchId,
                         principalTable: "Switches",
                         principalColumn: "SwitchId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserSwitch_Users_UserId",
+                        name: "FK_UserSwitches_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -93,15 +93,21 @@ namespace SwitchesAPI.DB.Migrations
                 column: "RoomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSwitch_SwitchId",
-                table: "UserSwitch",
+                name: "IX_Users_Name",
+                table: "Users",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSwitches_SwitchId",
+                table: "UserSwitches",
                 column: "SwitchId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserSwitch");
+                name: "UserSwitches");
 
             migrationBuilder.DropTable(
                 name: "Switches");

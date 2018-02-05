@@ -41,7 +41,7 @@ namespace SwitchesAPI.Controllers
         /// <returns>Room if exist</returns>
         [Route("{id}")]
         [HttpGet]
-        public IActionResult GetById (int id)
+        public IActionResult GetUserById (int id)
         {
             User user = usersService.GetById(id);
 
@@ -68,6 +68,26 @@ namespace SwitchesAPI.Controllers
                 return NotFound();
             }
             return Ok(AutoMapper.Mapper.Map<List<SwitchResponse>>(switches));
+        }
+
+        /// <summary>
+        /// Get User's Switch
+        /// </summary>
+        /// <param name="userId">User Id</param>
+        /// <param name="switchId">Switch Id</param>
+        /// <returns>Room's switches if exist</returns>
+        [HttpGet]
+        [Route("{UserId}/Switch/{switchId}")]
+        public IActionResult GetUserSwitch (int userId, int switchId)
+        {
+            var switches = usersService.GetUserSwitches(userId);
+            var _switch = switches.FirstOrDefault(s => s.Id == switchId);
+
+            if ( _switch == null )
+            {
+                return NotFound();
+            }
+            return Ok(AutoMapper.Mapper.Map<SwitchResponse>(_switch));
         }
 
         // <summary>
@@ -97,12 +117,12 @@ namespace SwitchesAPI.Controllers
         [HttpGet]
         public IActionResult AddSwitchToUser(int userId, int switchId)
         {
-            if (!usersService.AddSwitchToUser(userId, switchId))
+            if (!usersService.AddSwitchToUser(switchId, userId) )
             {
              return BadRequest();
             }
 
-            return Ok();
+            return (GetUserSwitch(userId, switchId));
         }
 
         [Route("{userName}/GetUserCredentials")]
@@ -137,9 +157,8 @@ namespace SwitchesAPI.Controllers
         ///     Update User in repositorium
         /// </summary>
         /// <param name="userId">Updated userId</param>
-        /// <param name="user">obj Switch</param>
         /// <returns></returns>
-        [HttpPut("{switchId}")]
+        [HttpPut("{userId}")]
         public IActionResult Put (int userId, [FromBody] UserRequest _user)
         {
             User user = Mapper.Map<User>(_user);
@@ -152,7 +171,7 @@ namespace SwitchesAPI.Controllers
 
             // var sw = _switchesService.GetById(switchId);
             // return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
-            return GetById(userId);
+            return GetUserById(userId);
         }
 
         /// <summary>
@@ -160,10 +179,10 @@ namespace SwitchesAPI.Controllers
         /// </summary>
         /// <param name="userId">User identifier</param>
         /// <returns></returns>
-        [HttpDelete("{switchId}")]
-        public IActionResult Delete (int UserId)
+        [HttpDelete("{userId}")]
+        public IActionResult Delete (int userId)
         {
-            if ( !usersService.DeleteUser(UserId) )
+            if ( !usersService.DeleteUser(userId) )
             {
                 return BadRequest();
             }

@@ -59,9 +59,9 @@ namespace SwitchesAPI.Services
 
             var userRoomsIds = userSwitches.GroupBy(sw => sw.RoomId).Select(g => g.Key).ToList();
 
-            foreach (var RoomId in userRoomsIds )
+            foreach (var roomId in userRoomsIds )
             {
-                rooms.Add(context.Rooms.Find(RoomId));
+                rooms.Add(context.Rooms.Find(roomId));
             }
 
             //var userSwitchesCount = users.FirstOrDefault(u => u.Id == id).UserSwitches.Where(e => e.UserId == id)
@@ -77,20 +77,22 @@ namespace SwitchesAPI.Services
 
             if ( _switch == null || user == null) return false;
 
+            if (context.UserSwitches.FirstOrDefault(u => u.SwitchId == _switch.Id && u.UserId == user.Id) != null)
+            {
+                return true;
+            }
 
             var users = context.Users
                 .Include(e => e.UserSwitches)
                 .ThenInclude(e => e.Switch)
-                .ToList();
-
-            users.FirstOrDefault(u => u.Id == user.Id).UserSwitches.Add(new UserSwitch() { SwitchId = _switch.Id });
+                .ToList();           
 
             try
             {
+                users.FirstOrDefault(u => u.Id == user.Id)?.UserSwitches.Add(new UserSwitch() { SwitchId = _switch.Id });
                 context.SaveChanges();
-
             }
-            catch ( DbUpdateException )
+            catch ( InvalidOperationException )
             {
                 return false;
             }
@@ -101,8 +103,8 @@ namespace SwitchesAPI.Services
 
         public (string PasswordSalt, string Password) GetUserCredentials (string userName)
         {
-            var password = context.Users.FirstOrDefault(u => u.Name == userName).Password ?? "NULL";
-            var passwordSalt = context.Users.FirstOrDefault(u => u.Name == userName).PasswordSalt ?? "NULL";
+            var password = context.Users.FirstOrDefault(u => u.Name == userName)?.Password ?? "NULL";
+            var passwordSalt = context.Users.FirstOrDefault(u => u.Name == userName)?.PasswordSalt ?? "NULL";
 
             return (passwordSalt, password);
         }

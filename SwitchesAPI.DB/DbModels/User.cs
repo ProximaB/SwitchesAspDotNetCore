@@ -12,7 +12,7 @@ namespace SwitchesAPI.DB.DbModels
     public class User
     {
         public int Id { get; set; }
-        [MaxLength(20)]
+        [Required, MaxLength(20)]
         public string Name { get; set; }
         [Column("Password Salt")]
         public string PasswordSalt { get; set; }

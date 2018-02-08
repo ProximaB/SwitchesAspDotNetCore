@@ -6,7 +6,7 @@
 :heavy_check_mark:   Create users with specyfic list of swithes or rooms that they are able to control.  
 
 **Previews:**
-<a href="https://ibb.co/kDbvMH"><img src="https://preview.ibb.co/dcM6Tx/image.png" alt="image" border="0"></a>
+<a href="https://image.ibb.co/gyy9gH/image.png"><img src="https://image.ibb.co/gyy9gH/image.png" alt="image" border="0"></a>
 
 #### TO DO
 - [X] Dodanie obsługi webSockets przez klienta, który aktualizuje widok.

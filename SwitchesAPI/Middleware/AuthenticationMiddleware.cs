@@ -43,7 +43,7 @@ namespace SwitchesAPI.Middleware
                 }
                 else
                 {
-                    User user = dbContext.Users.FirstOrDefault((u => u.Name == username));
+                    User user = dbContext.Users.FirstOrDefault((u => u.UserName == username));
                     if ( user == null )
                     {
                         context.Response.StatusCode = 401; //Unauthorized
@@ -54,14 +54,14 @@ namespace SwitchesAPI.Middleware
                     bool passwordIsValid = AuthenticationHashHandler.CompareByteArrays(passwordHash, user.Password);
 
                     if ( passwordIsValid == true )
-                    {
-                        var requestUrl = context.Request.Path.Value;
+                    {   //TODO
+                        //var requestUrl = context.Request.Path.Value; 
 
-                        var constApIsuffix = requestUrl.Substring(requestUrl.IndexOf("/api/", StringComparison.Ordinal) + 5);
+                        //var constApIsuffix = requestUrl.Substring(requestUrl.IndexOf("/api/", StringComparison.Ordinal) + 5);
                         
-                        var redirectUrl = string.Format("/api/Users/{0}/{1}", user.Id, constApIsuffix);
+                        //var redirectUrl = string.Format("/api/Users/{0}/{1}", user.Id, constApIsuffix);
 
-                        context.Response.Redirect(redirectUrl, true);
+                        //context.Response.Redirect(redirectUrl, false);
 
                         await _next.Invoke(context);
                     }

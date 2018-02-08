@@ -10,6 +10,7 @@ namespace SwitchesAPI.Mapping
         {
             CreateMap<UserRequest, User>();
             CreateMap<User, UserResponse>();
+            CreateMap<UserRequestPut, User>();
         }
     }
 }

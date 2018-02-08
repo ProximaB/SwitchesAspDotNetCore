@@ -11,9 +11,10 @@ namespace SwitchesAPI.DB.DbModels
 {
     public class User
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required, MaxLength(20)]
-        public string Name { get; set; }
+        [Key, MaxLength(20)]
+        public string UserName { get; set; }
         [Column("Password Salt")]
         public string PasswordSalt { get; set; }
         public string Password { get; set; }

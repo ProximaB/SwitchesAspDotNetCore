@@ -10,9 +10,11 @@ namespace SwitchesAPI.Models
 {
     public class UserSwitch
     {
-        public int UserId { get; set; }
+        [ForeignKey ("User")]
+        public string UserName { get; set; }
         public User User { get; set; }
 
+        [ForeignKey ("Switch")]
         public int SwitchId { get; set; }
         public  Switch Switch { get; set; }
     }

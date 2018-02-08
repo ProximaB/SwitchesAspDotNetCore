@@ -9,19 +9,20 @@ namespace SwitchesAPI.Interfaces
 {
     public interface IUsersService
     {
+        int? LastUpdatedId { get; }
         List<User> GetAll ();
-        User GetById (int id);
-        List<Switch> GetUserSwitches (int id);
-        List<Room> GetUserRooms (int id);
-        bool AddSwitchToUser (int switchId, int userId);
-        bool AddNewSwitchToRepo(int userId, Switch _switch);
+        User GetById (int userId);
+        User GetByUserName (string userName);
+        List<Switch> GetUserSwitches (string userName);
+        List<Room> GetUserRooms (string userName);
+        bool UpdateUserSwitch (string userName, int switchId, Switch _switch);
+        bool AddSwitchToUser (int switchId, string userName);
+        bool AddNewSwitchToRepo (string userName, Switch _switch);
         (string PasswordSalt, string Password) GetUserCredentials (string userName);
         bool AddNewUser (User user);
         bool UpdateUser (User user);
-        bool DeleteUser (int userId);
+        bool DeleteUser (string userName);
 
-        int? LastUpdatedId { get; }
-        bool UpdateUserSwitch(int userId, int switchId, Switch _switch);
     }
 }
 // Adding New User, New user first login set password

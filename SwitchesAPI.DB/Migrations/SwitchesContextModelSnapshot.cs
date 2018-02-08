@@ -69,24 +69,24 @@ namespace SwitchesAPI.DB.Migrations
 
             modelBuilder.Entity("SwitchesAPI.DB.DbModels.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("UserName")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20);
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnName("Create Date");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Password");
 
                     b.Property<string>("PasswordSalt")
                         .HasColumnName("Password Salt");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserName");
 
-                    b.HasIndex("Name")
+                    b.HasIndex("UserName")
                         .IsUnique();
 
                     b.ToTable("Users");
@@ -94,11 +94,11 @@ namespace SwitchesAPI.DB.Migrations
 
             modelBuilder.Entity("SwitchesAPI.Models.UserSwitch", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserName");
 
                     b.Property<int>("SwitchId");
 
-                    b.HasKey("UserId", "SwitchId");
+                    b.HasKey("UserName", "SwitchId");
 
                     b.HasIndex("SwitchId");
 
@@ -122,7 +122,7 @@ namespace SwitchesAPI.DB.Migrations
 
                     b.HasOne("SwitchesAPI.DB.DbModels.User", "User")
                         .WithMany("UserSwitches")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserName")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

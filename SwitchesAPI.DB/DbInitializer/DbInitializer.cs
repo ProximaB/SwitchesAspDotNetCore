@@ -44,22 +44,22 @@ namespace SwitchesAPI.DB.DbInitializer
             context.SaveChanges();
 
             context.Users.AddRange(
-                new User() { Name = "User1", CreateDate = DateTime.Now },
-                new User() { Name = "User2", CreateDate = DateTime.Now },
-                new User() { Name = "User3", CreateDate = DateTime.Now },
-                new User() { Name = "User4", CreateDate = DateTime.Now }
+                new User() { UserName = "User1", CreateDate = DateTime.Now },
+                new User() { UserName = "User2", CreateDate = DateTime.Now },
+                new User() { UserName = "User3", CreateDate = DateTime.Now },
+                new User() { UserName = "User4", CreateDate = DateTime.Now }
             );
             context.SaveChanges();
 
             context.UserSwitches.AddRange(
-                new UserSwitch() { UserId = 1, SwitchId = 1 },
-                new UserSwitch() { UserId = 2, SwitchId = 2 },
-                new UserSwitch() { UserId = 3, SwitchId = 3 },
-                new UserSwitch() { UserId = 4, SwitchId = 4 },
-                new UserSwitch() { UserId = 1, SwitchId = 5 },
-                new UserSwitch() { UserId = 2, SwitchId = 6 },
-                new UserSwitch() { UserId = 3, SwitchId = 7 },
-                new UserSwitch() { UserId = 4, SwitchId = 8 }
+                new UserSwitch() { UserName = "User1", SwitchId = 1 },
+                new UserSwitch() { UserName = "User2", SwitchId = 2 },
+                new UserSwitch() { UserName = "User3", SwitchId = 3 },
+                new UserSwitch() { UserName = "User4", SwitchId = 4 },
+                new UserSwitch() { UserName = "User1", SwitchId = 5 },
+                new UserSwitch() { UserName = "User2", SwitchId = 6 },
+                new UserSwitch() { UserName = "User3", SwitchId = 7 },
+                new UserSwitch() { UserName = "User4", SwitchId = 8 }
                 );
             context.SaveChanges();
         }

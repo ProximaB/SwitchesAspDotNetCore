@@ -139,7 +139,7 @@ namespace SwitchesAPI.Controllers
             //var sw = _switchesService.GetById(switchId);
             //return Ok(AutoMapper.Mapper.Map<SwitchResponse>(sw));
             var message = $"{switchId}:{state}";
-            await _notificationsMessageHandler.SendMessageToAllAsync(message);
+            _notificationsMessageHandler.SendMessageToAllAsync(message);
             return Get(switchId);
         }
 

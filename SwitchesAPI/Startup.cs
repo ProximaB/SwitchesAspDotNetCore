@@ -13,6 +13,7 @@ using SwitchesAPI.Extensions.WebSocketManager;
 using SwitchesAPI.Handlers.WebSocketsHandlers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using SwitchesAPI.Middleware;
 
 namespace SwitchesAPI
@@ -23,7 +24,7 @@ namespace SwitchesAPI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //potrzebny przy SSE, aktualnie nie dodawany domyślnie
+            //services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //potrzebny przy SSE, aktualnie nie dodawany domyślnie
 
             services.AddMvc();
 
@@ -60,14 +61,20 @@ namespace SwitchesAPI
             }
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:12345")
+                builder.WithOrigins("localhost")
                     .AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
             );
 
             //for Client presentation only
             var options = new DefaultFilesOptions();
             options.DefaultFileNames.Clear();
-            options.DefaultFileNames.Add("SwitchAPIClient.html");
+            options.DefaultFileNames.Add("mainPage.html");
+            options.DefaultFileNames.Add("adminPage.html");
+            options.DefaultFileNames.Add("js/FABridge.js");
+            options.DefaultFileNames.Add("js/json2.js");
+            options.DefaultFileNames.Add("js/swfobject.ks");
+            options.DefaultFileNames.Add("js/web_socket.js");
+            options.DefaultFileNames.Add("styles.css");
             app.UseDefaultFiles(options);
             app.UseStaticFiles();
             //
@@ -99,9 +106,9 @@ namespace SwitchesAPI
 
             //app.MapWebSocketManager("/test", serv.GetService<BoardNotificationsHandler>());
             app.MapWebSocketManager("/notifications", serv.GetService<NotificationsMessageHandler>());
-            app.MapWebSocketManager("/SwitchChanged", serv.GetService<SwitchChangedHandler>());
+           // app.MapWebSocketManager("/SwitchChanged", serv.GetService<SwitchChangedHandler>());
 
-            app.UseMiddleware<AuthenticationMiddleware>();
+           app.UseMiddleware<AuthenticationMiddleware>();
 
             app.UseMvc();
 

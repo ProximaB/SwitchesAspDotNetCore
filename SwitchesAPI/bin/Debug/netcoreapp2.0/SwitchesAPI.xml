@@ -89,75 +89,81 @@
             <param name="switchId">switch identifier</param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:SwitchesAPI.Controllers.UsersController.GetAll" -->
-        <member name="M:SwitchesAPI.Controllers.UsersController.GetUserById(System.Int32)">
+        <member name="M:SwitchesAPI.Controllers.UsersController.GetAll">
             <summary>
-            Get User by Id
+            Get all Users
             </summary>
-            <param name="userId">Room id</param>
+            <returns></returns>
+        </member>
+        <member name="M:SwitchesAPI.Controllers.UsersController.GetUserById(System.String)">
+            <summary>
+            Get User by name
+            </summary>
+            <param name="userName">User name</param>
             <returns>Room if exist</returns>
         </member>
-        <member name="M:SwitchesAPI.Controllers.UsersController.GetUserSwitches(System.Int32)">
+        <member name="M:SwitchesAPI.Controllers.UsersController.GetUserSwitches(System.String)">
             <summary>
             Get User's List of switches
             </summary>
-            <param name="id">user Id</param>
+            <param name="userName">user Id</param>
             <returns>Room's switches if exist</returns>
         </member>
-        <member name="M:SwitchesAPI.Controllers.UsersController.GetUserSwitch(System.Int32,System.Int32)">
+        <member name="M:SwitchesAPI.Controllers.UsersController.GetUserSwitch(System.String,System.Int32)">
             <summary>
             Get User's Switch
             </summary>
-            <param name="userId">User Id</param>
+            <param name="userName">Username</param>
             <param name="switchId">Switch Id</param>
             <returns>Room's switches if exist</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:SwitchesAPI.Controllers.UsersController.GetUserRooms(System.Int32)" -->
-        <!-- Badly formed XML comment ignored for member "M:SwitchesAPI.Controllers.UsersController.AddSwitchToUser(System.Int32,System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "M:SwitchesAPI.Controllers.UsersController.GetUserRooms(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:SwitchesAPI.Controllers.UsersController.AddSwitchToUser(System.String,System.Int32)" -->
         <member name="M:SwitchesAPI.Controllers.UsersController.Post(SwitchesAPI.Models.UserRequest)">
             Add new User to repositorium.
             <summary></summary>
             <para name="user">user</para>
             <returns></returns>
         </member>
-        <member name="M:SwitchesAPI.Controllers.UsersController.Post(System.Int32,SwitchesAPI.Models.SwitchRequest)">
+        <member name="M:SwitchesAPI.Controllers.UsersController.Post(System.String,SwitchesAPI.Models.SwitchRequest)">
             <summary>
                 Add new switch to repositorium
             </summary>
-            <param name="userId">new switch</param>
+            <param name="userName">new switch</param>
             <param name="_switch">new switch</param>
             <returns></returns>
         </member>
-        <member name="M:SwitchesAPI.Controllers.UsersController.Put(System.Int32,SwitchesAPI.Models.UserRequest)">
+        <member name="M:SwitchesAPI.Controllers.UsersController.Put(System.String,SwitchesAPI.Models.UserRequestPut)">
             <summary>
                 Update User in repositorium
             </summary>
-            <param name="userId">Updated userId</param>
+            <param name="userName">Updated userName</param>
+            <param name="_user">Updated userName</param>
             <returns></returns>
         </member>
-        <member name="M:SwitchesAPI.Controllers.UsersController.Put(System.Int32,System.Int32,SwitchesAPI.Models.RoomRequest)">
+        <member name="M:SwitchesAPI.Controllers.UsersController.PutAsync(System.String,System.Int32,SwitchesAPI.Models.SwitchRequest)">
             <summary>
             Update User's Switch in repositorium
             </summary>
-            <param name="userId">user Id</param>
+            <param name="userName">user Id</param>
             <param name="switchId">updated switchId</param>
             <param name="_switch">updated switch</param>
             <returns></returns>
         </member>
-        <member name="M:SwitchesAPI.Controllers.UsersController.PutAsync(System.Int32,System.Int32,System.String)">
+        <member name="M:SwitchesAPI.Controllers.UsersController.PutAsync(System.String,System.Int32,System.String)">
             <summary>
                 Update state of switch by Id.
             </summary>
-            <param name="userId">Updated switch Id</param>
+            <param name="userName">Updated switch Id</param>
             <param name="switchId">Updated switch Id</param>
             <param name="state">state of Switch [ON/OFF]</param>
             <returns></returns>
         </member>
-        <member name="M:SwitchesAPI.Controllers.UsersController.Delete(System.Int32)">
+        <member name="M:SwitchesAPI.Controllers.UsersController.Delete(System.String)">
             <summary>
                 Delete User from repositorium
             </summary>
-            <param name="userId">User identifier</param>
+            <param name="userName">User identifier</param>
             <returns></returns>
         </member>
     </members>

@@ -15,6 +15,8 @@ using SwitchesAPI.Handlers;
 
 namespace SwitchesAPI.Services
 {
+   
+
     public class UsersService : IUsersService
     {
         private readonly SwitchesContext context;
@@ -28,51 +30,56 @@ namespace SwitchesAPI.Services
             return context.Users.ToList();
         }
 
-        public User GetById (int id)
+        public User GetById (int userId)
         {
-            return context.Users.FirstOrDefault(u => u.Id == id);
+            return context.Users.FirstOrDefault(u => u.Id == userId);
         }
 
-        public List<Switch> GetUserSwitches (int id)
+        public User GetByUserName (string userName)
+        {
+            return context.Users.FirstOrDefault(u => u.UserName == userName);
+        }
+
+        public List<Switch> GetUserSwitches (string userName)
         {
             var users = context.Users
                 .Include(e => e.UserSwitches)
                 .ThenInclude(e => e.Switch)
                 .ToList();
 
-            //  var userSwitches = users.FirstOrDefault(u => u.Id == id).UserSwitches.Where(e => e.UserId == id).Select(us => us.Switch).ToList();
-            var userSwitches = context.UserSwitches.Include(u => u.Switch).Where(u => u.UserId == id)
+            //  var userSwitches = users.FirstOrDefault(u => u.UserName == userName).UserSwitches.Where(e => e.UserName == userName).Select(us => us.Switch).ToList();
+            var userSwitches = context.UserSwitches.Include(u => u.Switch).Where(u => u.UserName == userName)
                 .Select(sw => sw.Switch).ToList();
             return userSwitches;
         }
 
-        public List<Room> GetUserRooms (int id)
+        public List<Room> GetUserRooms (string userName)
         {
             var rooms = new List<Room>();
 
-            //var userSwitches = users.FirstOrDefault(u => u.Id == id).UserSwitches.Where(e => e.UserId == id)
+            //var userSwitches = users.FirstOrDefault(u => u.UserName == userName).UserSwitches.Where(e => e.UserName == userName)
             //    .Select(us => us.Switch).GroupBy(sw => sw.RoomId).Select(sw => sw.ToList()).ToList();
 
-            var userSwitches = context.UserSwitches.Include(u => u.Switch).Where(u => u.UserId == id)
-                .Select(sw => sw.Switch);
+            var userSwitches = context.UserSwitches.Include(u => u.Switch).Include(u => u.Switch).ToList();
 
-            var userRoomsIds = userSwitches.GroupBy(sw => sw.RoomId).Select(g => g.Key).ToList();
+            var userRoomsIds = userSwitches.Where(u => u.UserName == userName).Select(sw => sw.Switch)
+                .GroupBy(sw => sw.RoomId).Select(g => g.Key);
 
             foreach ( var roomId in userRoomsIds )
             {
                 rooms.Add(context.Rooms.Find(roomId));
             }
 
-            //var userSwitchesCount = users.FirstOrDefault(u => u.Id == id).UserSwitches.Where(e => e.UserId == id)
-            //    .Select(us => us.Switch).GroupBy(sw => new { sw.Id, sw.RoomId }).Select(g => g.Count()).ToList();
+            //var userSwitchesCount = users.FirstOrDefault(u => u.UserName == userName).UserSwitches.Where(e => e.UserName == userName)
+            //    .Select(us => us.Switch).GroupBy(sw => new { sw.UserName, sw.RoomId }).Select(g => g.Count()).ToList();
 
             return rooms;
         }
 
-        public bool UpdateUserSwitch (int userId, int switchId, Switch _switch)
+        public bool UpdateUserSwitch (string userName, int switchId, Switch _switch)
         {
             var userSwitch = context.UserSwitches.Include(u => u.User).Include(s => s.Switch)
-                .FirstOrDefault(us => us.UserId == userId && us.SwitchId == switchId);
+                .FirstOrDefault(us => us.UserName == userName && us.SwitchId == switchId);
 
 
             Switch foundSwitch = userSwitch.Switch;
@@ -102,14 +109,14 @@ namespace SwitchesAPI.Services
         }
 
 
-        public bool AddSwitchToUser (int switchId, int userId)
+        public bool AddSwitchToUser (int switchId, string userName)
         {
             var _switch = context.Switches.Find(switchId);
-            var user = context.Users.Find(userId);
+            var user = context.Users.Find(userName);
 
             if ( _switch == null || user == null ) return false;
 
-            if ( context.UserSwitches.FirstOrDefault(u => u.SwitchId == _switch.Id && u.UserId == user.Id) != null )
+            if ( context.UserSwitches.FirstOrDefault(u => u.SwitchId == _switch.Id && u.UserName == user.UserName) != null )
             {
                 return true;
             }
@@ -121,7 +128,7 @@ namespace SwitchesAPI.Services
 
             try
             {
-                users.FirstOrDefault(u => u.Id == user.Id)?.UserSwitches.Add(new UserSwitch() { SwitchId = _switch.Id });
+                users.FirstOrDefault(u => u.UserName == user.UserName)?.UserSwitches.Add(new UserSwitch() { SwitchId = _switch.Id });
                 context.SaveChanges();
             }
             catch ( InvalidOperationException )
@@ -133,7 +140,7 @@ namespace SwitchesAPI.Services
 
         }
 
-        public bool AddNewSwitchToRepo (int userId, Switch _switch)
+        public bool AddNewSwitchToRepo (string userName, Switch _switch)
         {
 
             if ( _switch == null )
@@ -155,13 +162,13 @@ namespace SwitchesAPI.Services
                 return false;
             }
 
-            return AddSwitchToUser(_switch.Id, userId);
+            return AddSwitchToUser(_switch.Id, userName);
         }
 
         public (string PasswordSalt, string Password) GetUserCredentials (string userName)
         {
-            var password = context.Users.FirstOrDefault(u => u.Name == userName)?.Password ?? "NULL";
-            var passwordSalt = context.Users.FirstOrDefault(u => u.Name == userName)?.PasswordSalt ?? "NULL";
+            var password = context.Users.FirstOrDefault(u => u.UserName == userName)?.Password ?? "NULL";
+            var passwordSalt = context.Users.FirstOrDefault(u => u.UserName == userName)?.PasswordSalt ?? "NULL";
 
             return (passwordSalt, password);
         }
@@ -196,15 +203,16 @@ namespace SwitchesAPI.Services
 
         public bool UpdateUser (User user)
         {
-            User foundUser = GetById(user.Id);
+            User foundUser = GetByUserName(user.UserName);
 
             if ( foundUser == null )
             {
                 return false;
             }
 
+
             foundUser.CreateDate = DateTime.Now;
-            foundUser.Name = user.Name;
+            //foundUser.UserName = user.UserName;
 
             foundUser.PasswordSalt = String.Empty.GetSalt(11);
             foundUser.Password = AuthenticationHashHandler.GenerateSaltedHash(user.Password, foundUser.PasswordSalt);
@@ -212,7 +220,7 @@ namespace SwitchesAPI.Services
             try
             {
                 context.SaveChanges();
-                LastUpdatedId = user.Id;
+                LastUpdatedId = foundUser.Id;
             }
             catch ( DbUpdateException )
             {
@@ -221,9 +229,9 @@ namespace SwitchesAPI.Services
             return true;
         }
 
-        public bool DeleteUser (int userId)
+        public bool DeleteUser (string userName)
         {
-            var user = context.Users.FirstOrDefault(u => u.Id == userId);
+            var user = context.Users.FirstOrDefault(u => u.UserName == userName);
 
             if ( user == null )
             {

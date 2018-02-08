@@ -8,7 +8,7 @@
 #### TO DO
 - [X] Dodanie obsługi webSockets przez klienta, który aktualizuje widok.
 - [X] Dodanie ekranu logowania.
-- [ ] Basic Auth WebApi + Tabela użytkowników. Response dopasowany do użytkownika. *(niekoniecznie basic auth, tylko moze zaimplementowac cos w mvc ctrl.)*
+- [X] Basic Auth WebApi + Tabela użytkowników. Response dopasowany do użytkownika. *(niekoniecznie basic auth, tylko moze zaimplementowac cos w mvc ctrl.)*
 - [ ] Dodanie do switcha możliwości ustawiania SSID i PASSWORD w trybie AccesPOint.  
 - [ ] Domyślne dodawanie switcha do bazy po połączeniu do Serwera.  
 *Switch name: [NOT_DEFINED], description[], idRoom[] * aby użytkownik mógł zedytować w cliecie.*

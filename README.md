@@ -3,7 +3,10 @@
 **Smart Lighting Control Systems and more!**
 
 :heavy_check_mark:   Control your switches any device with a web browser  
-:heavy_check_mark:   Create users with specyfic list of swithes or rooms that they are able to control.
+:heavy_check_mark:   Create users with specyfic list of swithes or rooms that they are able to control.  
+
+**Previews:**
+<img src="https://lh6.googleusercontent.com/Ee6WPIs3dVMUaxJBQukrSbnoAc1YGmpmvf0xgpxIbVG-UgGo_jrud8MgVxYnUuzSSStp_ZJ6sO1_DNsDroZS=w1910-h905-rw" />
 
 #### TO DO
 - [X] Dodanie obsługi webSockets przez klienta, który aktualizuje widok.

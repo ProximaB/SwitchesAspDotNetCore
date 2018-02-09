@@ -30,5 +30,5 @@
       - Jeżeli tak -> idź do 1.  
 - [ ] Gdyby był jeszcze czas można pomyśleć o UDP broadcasting, Esp  nasłuchiwało by i pobierało odpowiedni adres do WebApi, żeby nie musiał być zahardcodowany.
 
-:gem: If you're interested in this project feel free to contribute to development. I'm waiting for you pull request! :blush:  
+:gem: If you're interested in this project feel free to contribute to development. I'm waiting for your pull request! :blush:  
 

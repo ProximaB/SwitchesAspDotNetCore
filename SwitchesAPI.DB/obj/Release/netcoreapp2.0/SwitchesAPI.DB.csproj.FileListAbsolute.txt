@@ -1,0 +1,8 @@
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI.DB\bin\Release\netcoreapp2.0\SwitchesAPI.DB.deps.json
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI.DB\bin\Release\netcoreapp2.0\SwitchesAPI.DB.dll
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI.DB\bin\Release\netcoreapp2.0\SwitchesAPI.DB.pdb
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI.DB\obj\Release\netcoreapp2.0\SwitchesAPI.DB.csproj.CoreCompileInputs.cache
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI.DB\obj\Release\netcoreapp2.0\SwitchesAPI.DB.AssemblyInfoInputs.cache
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI.DB\obj\Release\netcoreapp2.0\SwitchesAPI.DB.AssemblyInfo.cs
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI.DB\obj\Release\netcoreapp2.0\SwitchesAPI.DB.dll
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI.DB\obj\Release\netcoreapp2.0\SwitchesAPI.DB.pdb

@@ -12744,11 +12744,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\barte\\source\\repos\\SwitchesAspDotNetCore\\SwitchesAPI\\SwitchesAPI.csproj",
+      "projectUniqueName": "C:\\Users\\barte\\Desktop\\Switches\\SwitchesAspDotNetCore\\SwitchesAPI\\SwitchesAPI.csproj",
       "projectName": "SwitchesAPI",
-      "projectPath": "C:\\Users\\barte\\source\\repos\\SwitchesAspDotNetCore\\SwitchesAPI\\SwitchesAPI.csproj",
+      "projectPath": "C:\\Users\\barte\\Desktop\\Switches\\SwitchesAspDotNetCore\\SwitchesAPI\\SwitchesAPI.csproj",
       "packagesPath": "C:\\Users\\barte\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\barte\\source\\repos\\SwitchesAspDotNetCore\\SwitchesAPI\\obj\\",
+      "outputPath": "C:\\Users\\barte\\Desktop\\Switches\\SwitchesAspDotNetCore\\SwitchesAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12767,8 +12767,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\barte\\source\\repos\\SwitchesAspDotNetCore\\SwitchesAPI.DB\\SwitchesAPI.DB.csproj": {
-              "projectPath": "C:\\Users\\barte\\source\\repos\\SwitchesAspDotNetCore\\SwitchesAPI.DB\\SwitchesAPI.DB.csproj"
+            "C:\\Users\\barte\\Desktop\\Switches\\SwitchesAspDotNetCore\\SwitchesAPI.DB\\SwitchesAPI.DB.csproj": {
+              "projectPath": "C:\\Users\\barte\\Desktop\\Switches\\SwitchesAspDotNetCore\\SwitchesAPI.DB\\SwitchesAPI.DB.csproj"
             }
           }
         }

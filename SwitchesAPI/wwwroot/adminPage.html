@@ -255,7 +255,7 @@
     $(document).ready(function () {
         //ws = new WebSocket("ws://192.168.137.1:57493/notifications");
         //ws = new WebSocket("ws://192.168.0.101:12345/notifications");
-        ws = new WebSocket("ws://http://192.168.137.1:80/notifications");
+        ws = new WebSocket("ws://192.168.137.1:80/notifications");
         console.log("Web Socket notifications connected!");
         ws.onmessage = function (evt) {
             self = this;
@@ -273,7 +273,7 @@
             }
         };
 
-        ws = new WebSocket("ws://http://192.168.137.1:80/SwitchChanged");
+        ws = new WebSocket("ws://192.168.137.1:80/SwitchChanged");
         console.log("Web Socket SwitchChanged connected!");
         ws.onmessage = function (evt) {
             self = this;

@@ -1,0 +1,12 @@
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI\bin\Any CPU\Release\netcoreapp2.0\SwitchesAPI.deps.json
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI\bin\Any CPU\Release\netcoreapp2.0\SwitchesAPI.runtimeconfig.json
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI\bin\Any CPU\Release\netcoreapp2.0\SwitchesAPI.runtimeconfig.dev.json
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI\bin\Any CPU\Release\netcoreapp2.0\SwitchesAPI.dll
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI\bin\Any CPU\Release\netcoreapp2.0\SwitchesAPI.pdb
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI\bin\Any CPU\Release\netcoreapp2.0\SwitchesAPI.DB.dll
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI\bin\Any CPU\Release\netcoreapp2.0\SwitchesAPI.DB.pdb
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI\obj\Any CPU\Release\netcoreapp2.0\SwitchesAPI.csproj.CoreCompileInputs.cache
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI\obj\Any CPU\Release\netcoreapp2.0\SwitchesAPI.AssemblyInfoInputs.cache
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI\obj\Any CPU\Release\netcoreapp2.0\SwitchesAPI.AssemblyInfo.cs
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI\obj\Any CPU\Release\netcoreapp2.0\SwitchesAPI.dll
+C:\Users\barte\Desktop\Switches\SwitchesAspDotNetCore\SwitchesAPI\obj\Any CPU\Release\netcoreapp2.0\SwitchesAPI.pdb

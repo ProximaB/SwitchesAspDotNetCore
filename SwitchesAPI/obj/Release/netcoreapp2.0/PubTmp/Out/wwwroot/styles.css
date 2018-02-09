@@ -1,0 +1,33 @@
+
+  @media (max-width: 630px) {
+    .optionBtn{
+        padding: 4px 6px;
+        width: 100%;
+        margin: 10px;
+    }
+}
+
+  @media (max-width: 408px) {
+    .loginBtn{
+        padding: 4px 6px;
+        width: 100%;
+    }
+    .form-control{
+        width: 100%;
+        
+    }
+    .login {
+        overflow: hidden;
+        padding-right: 25px;
+    }
+}
+
+.label-success {
+    padding-left:  6.64px;
+
+}
+
+.btn-mini {
+    position: relative;
+    float: right;
+}

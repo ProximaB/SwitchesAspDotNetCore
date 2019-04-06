@@ -1,5 +1,6 @@
 # Switches
-
+<a href="https://github.com/ProximaB/SwitchesClientApi"> SwitchesClientApi </a>
+<a href="https://github.com/ProximaB/Switches-Board-Client-for-ESP">Switches-Board-Client-for-ESP</a>
 **Smart Lighting Control Systems and more!**
 
 :heavy_check_mark:   Control your switches any device with a web browser  
